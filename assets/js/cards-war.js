@@ -5,11 +5,18 @@ const twoPlayer = document.getElementById("twoPlayer");
 const player1name = document.getElementById("player1name");
 const player2name = document.getElementById("player2name");
 const startWarBtn = document.getElementById("startWarBtn");
-
+let player1;
+let player2;
 computerBtn.addEventListener("click", chooseComputer);
 friendBtn.addEventListener("click", chooseFriend);
+startWarBtn.addEventListener("click", startWarGame);
 
 function chooseComputer(){
+  player1 = localStorage.getItem("player1");
+  if(player1){
+    player1name.value = player1;
+  }
+
   //show the input for player 1
   onePlayer.classList.remove("hidden");
    //if there is input already there before keydown (edge case if user is flipping back and forward between options)
@@ -40,6 +47,15 @@ function chooseComputer(){
 }
 
 function chooseFriend(){
+  //check if user has played before, and give easy access to names if they'd like to use them again
+  player1 = localStorage.getItem("player1");
+  player2 = localStorage.getItem("player2");
+  if(player1){
+    player1name.value = player1;
+  }
+  if(player2){
+    player2name.value = player2;
+  }
   //show both input fields
   onePlayer.classList.remove("hidden");
   twoPlayer.classList.remove("hidden");
@@ -62,4 +78,17 @@ function chooseFriend(){
     //if going from two player to one player, remove the input for player 2
     twoPlayer.classList.add("hidden");
   })
+}
+
+function startWarGame(){
+    //Pull user input from each field
+    player1 = player1name.value;
+    player2 = player2name.value;
+   
+    //Put names into local storage
+    localStorage.setItem("player1", player1);
+    if(player2){
+      localStorage.setItem("player2", player2)
+    }
+
 }

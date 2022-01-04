@@ -5,6 +5,7 @@ const twoPlayer = document.getElementById("twoPlayer");
 const player1name = document.getElementById("player1name");
 const player2name = document.getElementById("player2name");
 const startWarBtn = document.getElementById("startWarBtn");
+const gameOptionsDiv = document.getElementById("gameOptions");
 let player1;
 let player2;
 computerBtn.addEventListener("click", chooseComputer);
@@ -12,6 +13,7 @@ friendBtn.addEventListener("click", chooseFriend);
 startWarBtn.addEventListener("click", startWarGame);
 
 function chooseComputer(){
+  //check if there's a previously used name in storage and add it to input if so
   player1 = localStorage.getItem("player1");
   if(player1){
     player1name.value = player1;
@@ -81,14 +83,18 @@ function chooseFriend(){
 }
 
 function startWarGame(){
-    //Pull user input from each field
-    player1 = player1name.value;
-    player2 = player2name.value;
-   
-    //Put names into local storage
-    localStorage.setItem("player1", player1);
-    if(player2){
-      localStorage.setItem("player2", player2)
-    }
+  savePlayerNames();
+  gameOptionsDiv.classList.add("hidden");
+}
 
+function savePlayerNames(){
+  //Pull user input from each field
+  player1 = player1name.value;
+  player2 = player2name.value;
+
+  //Put names into local storage
+  localStorage.setItem("player1", player1);
+  if(player2){
+    localStorage.setItem("player2", player2)
+  }
 }

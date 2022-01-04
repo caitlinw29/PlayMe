@@ -6,7 +6,7 @@
     <title>Play Me - War</title>
     <meta name="description" content="A digital card game of War!">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
     <!--Add a google font if desired-->
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
@@ -18,7 +18,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
-
+    <main>
+      <div id="gameOptions">
+        <div id="numberPlayers">
+          <p>Would you like to play against the computer or a friend?</p>
+          <div id="opponentChoice">
+            <button>Computer</button>
+            <button>Friend</button>
+          </div>
+        </div>
+        <div id="playerNames">
+          <div id="onePlayer" class="hidden">
+            <label for="player1name">Player 1 Name:</label>
+            <input type="text" id="player1name" name="player1name">
+          </div>
+          <div id="twoPlayer" class="hidden">
+            <label for="player2name">Player 1 Name:</label>
+            <input type="text" id="player2name" name="player2name">
+          </div>
+        </div>
+      </div>
+    </main>
 
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

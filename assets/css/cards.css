@@ -2,6 +2,10 @@
   display: none;
 }
 
+a {
+  color: inherit;
+}
+
 h1 {
   display:inline-block;
   margin-top: 10%;

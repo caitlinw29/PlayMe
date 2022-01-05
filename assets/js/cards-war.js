@@ -11,6 +11,7 @@ const overlay = document.getElementById("overlay");
 const instructions = document.getElementById("instructions");
 const player1text = document.getElementById("player1");
 const player2text = document.getElementById("player2");
+const flipCardsBtn = document.getElementById("flipCardBtn");
 let overlayVisible = false;
 let player1;
 let player2;
@@ -122,8 +123,14 @@ function startWarGame(){
   gameOptionsDiv.classList.add("hidden");
   player1text.textContent = localStorage.getItem("player1");
   player2text.textContent = localStorage.getItem("player2");
+  flipCardsBtn.addEventListener('click', flipCards);
 
 }
+
+function flipCards(){
+  
+}
+
 var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
 // fetch(cardDeckURL)
 // .then(function (response) {

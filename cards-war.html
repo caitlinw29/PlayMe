@@ -17,14 +17,14 @@
     <link rel="stylesheet" href="./assets/css/cards.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
-  <body>
-    <main>
+  <body class="cyan lighten-5">
+    <main class="center-align">
       <div id="gameOptions">
         <div id="numberPlayers">
-          <p>Would you like to play against the computer or a friend?</p>
+          <p>How many players?</p>
           <div id="opponentChoice">
-            <button id="computerBtn">Computer</button>
-            <button id="friendBtn">Friend</button>
+            <button id="computerBtn" class="btn-large">1</button>
+            <button id="friendBtn" class="btn-large">2</button>
           </div>
         </div>
         <div id="playerNames">
@@ -37,7 +37,7 @@
             <input type="text" id="player2name" name="player2name">
           </div>
         </div>
-        <button id="startWarBtn" class="hidden">Start the Game!</button>
+        <button id="startWarBtn" class="hidden btn-large">Start Game!</button>
       </div>
     </main>
 

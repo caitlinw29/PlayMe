@@ -1,3 +1,31 @@
 .hidden {
   display: none;
 }
+
+#gameOptions {
+  margin-top: 10%;
+}
+
+#gameOptions p {
+  font-size: 2rem;
+}
+
+#gameOptions label {
+  font-size: 1.5rem;
+}
+
+#gameOptions input {
+  margin-left: 2.5%;
+  margin-bottom: 2.5%;
+  width: 25%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#opponentChoice button {
+  margin: 2.5% 2.5% 5%;
+}
+
+#startWarBtn {
+  margin-top: 2.5%;
+}

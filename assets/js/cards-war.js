@@ -18,6 +18,9 @@ const card2Img = document.getElementById("card2");
 let overlayVisible = false;
 let player1;
 let player2;
+let deckID;
+let player1Deck;
+let player2Deck;
 
 
 // GAME OPTIONS PAGE //
@@ -128,23 +131,62 @@ function startWarGame(){
   player1text.textContent = localStorage.getItem("player1");
   player2text.textContent = localStorage.getItem("player2");
   flipCardsBtn.addEventListener('click', flipCards);
-
-}
-
-function flipCards(){
-  var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
+  var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
   fetch(cardDeckURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) { 
-      console.log(data);
-      var deckID = data.deck_id;
-      var card1src = data.cards[0].image;
-      var card2src = data.cards[1].image;
-      card1Img.src = card1src;
-      card2Img.src = card2src;
-      
+      deckID = data.deck_id;
+      player1Deck = "https://deckofcardsapi.com/api/deck/" + deckID+ "/draw/?count=26";
+      player2Deck = "https://deckofcardsapi.com/api/deck/" + deckID+ "/draw/?count=26";
+      makePiles();
     }) 
+  function makePiles(){
+    Promise.all([
+      fetch(player1Deck).then(resp => resp.json()),
+      fetch(player2Deck).then(resp => resp.json())
+    
+    ]).then(function(data){
+      console.log(data);
+    })
+    // fetch(player1PileURL)
+    //   .then(function (response) {
+    //     return response.json();
+    //   })
+    //   .then(function (data) { 
+    //     console.log(data);
+        
+        
+    //   }) 
+    // fetch(player2PileURL)
+    //   .then(function (response) {
+    //     return response.json();
+    //   })
+    //   .then(function (data) { 
+    //     console.log(data);
+      
+        
+    //   }) 
+  }
+ 
+
+}
+
+function flipCards(){
+  // var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
+  // fetch(cardDeckURL)
+  //   .then(function (response) {
+  //     return response.json();
+  //   })
+  //   .then(function (data) { 
+  //     console.log(data);
+  //     var deckID = data.deck_id;
+  //     var card1src = data.cards[0].image;
+  //     var card2src = data.cards[1].image;
+  //     card1Img.src = card1src;
+  //     card2Img.src = card2src;
+      
+  //   }) 
 }
 

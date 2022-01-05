@@ -9,6 +9,8 @@ const startWarBtn = document.getElementById("startWarBtn");
 const gameOptionsDiv = document.getElementById("gameOptions");
 const overlay = document.getElementById("overlay");
 const instructions = document.getElementById("instructions");
+const player1text = document.getElementById("player1");
+const player2text = document.getElementById("player2");
 let overlayVisible = false;
 let player1;
 let player2;
@@ -108,6 +110,8 @@ function savePlayerNames(){
   localStorage.setItem("player1", player1);
   if(player2){
     localStorage.setItem("player2", player2)
+  } else {
+    localStorage.setItem("player2", "Computer");
   }
 }
 
@@ -116,4 +120,15 @@ function savePlayerNames(){
 function startWarGame(){
   savePlayerNames();
   gameOptionsDiv.classList.add("hidden");
+  player1text.textContent = localStorage.getItem("player1");
+  player2text.textContent = localStorage.getItem("player2");
+
 }
+var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
+// fetch(cardDeckURL)
+// .then(function (response) {
+//   return response.json();
+// })
+// .then(function (data) { 
+//     console.log(data);  
+// }) 

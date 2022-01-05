@@ -15,6 +15,12 @@ h1 {
   border-bottom: 1px dotted teal;
 }
 
+#player1, 
+#player2, 
+#vs {
+  font-size: 2rem;
+}
+
 #gameOptions {
   margin-top: 2%;
 }

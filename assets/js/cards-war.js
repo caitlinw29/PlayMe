@@ -7,11 +7,14 @@ const player1name = document.getElementById("player1name");
 const player2name = document.getElementById("player2name");
 const startWarBtn = document.getElementById("startWarBtn");
 const gameOptionsDiv = document.getElementById("gameOptions");
+const gameContainer = document.getElementById("war-game-container");
 const overlay = document.getElementById("overlay");
 const instructions = document.getElementById("instructions");
 const player1text = document.getElementById("player1");
 const player2text = document.getElementById("player2");
 const flipCardsBtn = document.getElementById("flipCardBtn");
+const card1Img= document.getElementById("card1");
+const card2Img = document.getElementById("card2");
 let overlayVisible = false;
 let player1;
 let player2;
@@ -121,6 +124,7 @@ function savePlayerNames(){
 function startWarGame(){
   savePlayerNames();
   gameOptionsDiv.classList.add("hidden");
+  gameContainer.classList.remove("hidden");
   player1text.textContent = localStorage.getItem("player1");
   player2text.textContent = localStorage.getItem("player2");
   flipCardsBtn.addEventListener('click', flipCards);
@@ -128,14 +132,19 @@ function startWarGame(){
 }
 
 function flipCards(){
-  
+  var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
+  fetch(cardDeckURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) { 
+      console.log(data);
+      var deckID = data.deck_id;
+      var card1src = data.cards[0].image;
+      var card2src = data.cards[1].image;
+      card1Img.src = card1src;
+      card2Img.src = card2src;
+      
+    }) 
 }
 
-var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
-// fetch(cardDeckURL)
-// .then(function (response) {
-//   return response.json();
-// })
-// .then(function (data) { 
-//     console.log(data);  
-// }) 

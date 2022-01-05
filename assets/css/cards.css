@@ -1,0 +1,44 @@
+.hidden {
+  display: none;
+}
+
+a {
+  color: inherit;
+}
+
+h1 {
+  display:inline-block;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 500;
+  border-bottom: 1px dotted teal;
+}
+
+#gameOptions {
+  margin-top: 2%;
+}
+
+#gameOptions p {
+  font-size: 2rem;
+}
+
+#gameOptions label {
+  font-size: 1.5rem;
+}
+
+#gameOptions input {
+  margin-left: 2.5%;
+  margin-bottom: 2.5%;
+  width: 25%;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+#opponentChoice button {
+  margin: 2.5% 2.5% 5%;
+}
+
+#startWarBtn {
+  margin-top: 2.5%;
+}

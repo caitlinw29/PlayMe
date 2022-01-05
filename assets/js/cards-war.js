@@ -7,6 +7,9 @@ const player1name = document.getElementById("player1name");
 const player2name = document.getElementById("player2name");
 const startWarBtn = document.getElementById("startWarBtn");
 const gameOptionsDiv = document.getElementById("gameOptions");
+const overlay = document.getElementById("overlay");
+const instructions = document.getElementById("instructions");
+let overlayVisible = false;
 let player1;
 let player2;
 computerBtn.addEventListener("click", chooseComputer);
@@ -91,3 +94,20 @@ function savePlayerNames(){
     localStorage.setItem("player2", player2)
   }
 }
+
+//Materialize tooltip
+$(document).ready(function(){
+  $('.tooltipped').tooltip();
+});
+
+//functions to show how-to-play overlay on click of button
+function overlayOn() {
+  overlay.style.display = "block";
+  overlayVisible = true;
+}
+function overlayOff() {
+  overlay.style.display = "none";
+  overlayVisible = false;
+}
+overlay.addEventListener('click', overlayOff);
+instructions.addEventListener('click', overlayOn);

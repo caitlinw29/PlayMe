@@ -25,7 +25,7 @@
       <a href="./cards-war.html">
         <h1>🃏&nbspWar&nbsp🃏</h1>
       </a>
-      <div id="gameOptions">
+      <div id="gameOptions" class="hidden">
         <div id="numberPlayers">
           <p>How many players?</p>
           <div id="opponentChoice">
@@ -45,7 +45,48 @@
         </div>
         <button id="startWarBtn" class="hidden btn-large">Start Game!</button>
       </div>
+      <div class="container">
+        <!--1st Row-->
+        <div class="row">
+            <!--1st column top left-->
+            <div class="col s4">
+              <p id="player1">Caitlin</p>
+            </div>
+            <!-- 2nd column top middle-->
+            <div class="col s4">
+                
+            </div>
+              <!-- 3rd column top right -->
+            <div class="col s4">
+              <p id="player2">Amanda</p>
+            </div>
+        </div>
+      
+        <!-- 2nd row-->
+        <div class="row">
+          <!-- 1st column middle left   -->
+          <div class="col s4">
+            <img src="" class="img-fluid" alt="Back of card">
+          </div>
+          <!--2nd column middle middle -->
+          <div class="col s4">
+            <h1 class="text-center">VS</h1>
+          </div>
+          <!--3rd column middle right  -->
+          <div class="col s4">
+            <img src="" class="img-fluid" alt="Back of card">
+          </div>
+        </div>
+
+        <!--Third row-->
+        <div class="row">
+          <div class="col s4 offset-s4">
+            <button class="btn-large">Flip Cards</button>
+          </div>
+        </div>
+      </div>
     </main>
+
     <div id="overlay">
       <div id="overlay-text">
         <h3>Instructions</h3>

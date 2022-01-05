@@ -12,6 +12,10 @@ const instructions = document.getElementById("instructions");
 let overlayVisible = false;
 let player1;
 let player2;
+
+
+// GAME OPTIONS PAGE //
+
 computerBtn.addEventListener("click", chooseComputer);
 friendBtn.addEventListener("click", chooseFriend);
 startWarBtn.addEventListener("click", startWarGame);
@@ -78,23 +82,6 @@ function chooseFriend(){
   })
 }
 
-function startWarGame(){
-  savePlayerNames();
-  gameOptionsDiv.classList.add("hidden");
-}
-
-function savePlayerNames(){
-  //Pull user input from each field
-  player1 = player1name.value;
-  player2 = player2name.value;
-
-  //Put names into local storage
-  localStorage.setItem("player1", player1);
-  if(player2){
-    localStorage.setItem("player2", player2)
-  }
-}
-
 //Materialize tooltip
 $(document).ready(function(){
   $('.tooltipped').tooltip();
@@ -111,3 +98,22 @@ function overlayOff() {
 }
 overlay.addEventListener('click', overlayOff);
 instructions.addEventListener('click', overlayOn);
+
+function savePlayerNames(){
+  //Pull user input from each field
+  player1 = player1name.value;
+  player2 = player2name.value;
+
+  //Put names into local storage
+  localStorage.setItem("player1", player1);
+  if(player2){
+    localStorage.setItem("player2", player2)
+  }
+}
+
+
+// GAME FUNCTIONALITY
+function startWarGame(){
+  savePlayerNames();
+  gameOptionsDiv.classList.add("hidden");
+}

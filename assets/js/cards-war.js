@@ -173,6 +173,11 @@ function makePiles(){
       var card2src = data[1].cards[card2].image;
       card1Img.src = card1src;
       card2Img.src = card2src;
+      card1Img.alt = data[0].cards[card1].value + " " + data[0].cards[card1].suit;
+      card2Img.alt = data[1].cards[card2].value + " " + data[1].cards[card2].suit;
+
+      //flip cards animation
+      $(".flip-card-inner").css("transform", "rotateY(180deg)");
       
       //compare two player's card values. Winner pushes the two cards to their array. Loser loses that card from array.
       var card1numPlain = data[0].cards[card1].value;
@@ -203,15 +208,22 @@ function makePiles(){
         card2num = Number(card2numPlain);
       }
     
+      setTimeout(function() {
+        $(".flip-card-inner").css("transform", "rotateY(0deg)");
+      }, 3000)
       
       if(card1num > card2num){
         losingCard = data[1].cards[card2].code;
         removeElement(player2Cards, losingCard);
         player1Cards.push(losingCard);
+        setTimeout(() => {card1Img.classList.add("highlight")}, 1200);
+        setTimeout(() => {card1Img.classList.remove("highlight")}, 2200);
       } else if (card1num < card2num){
         losingCard = data[0].cards[card1].code;
         removeElement(player1Cards, losingCard);
         player2Cards.push(losingCard);
+        setTimeout(() => {card2Img.classList.add("highlight")}, 1200);
+        setTimeout(() => {card2Img.classList.remove("highlight")}, 2200);
       } else {
         console.log("WAR");
       }

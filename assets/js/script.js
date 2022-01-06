@@ -31,12 +31,15 @@
 // function storeData() {
 
 // save to favorites button returns save to favorites
+
+
 document.getElementById("fvBtn").addEventListener
     ("click", function(){
         console.log("Save to Favorites")
     });
 
-
+// var key = id=key <p> Price: <span id="price"></span></p>
+// var actName = id=
 
     // {
     //       document.getElementById("card-title").innerHTML = "Hello World";

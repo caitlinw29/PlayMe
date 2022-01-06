@@ -21,6 +21,7 @@ let player2;
 let deckID;
 let player1Deck;
 let player2Deck;
+let losingCard;
 
 
 // GAME OPTIONS PAGE //
@@ -151,52 +152,66 @@ function makePiles(){
   ]).then(function(data){
     const player1Cards = [];
     const player2Cards = [];
-    let card = 0;
-    let numCards1 = player1Cards.length;
-    let numCards2 = player2Cards.length;
+    let card1 = 0;
+    let card2 = 0;
+    var numCards1 = player1Cards.length;
+    var numCards2 = player2Cards.length;
     for(let i=0; i<data[0].cards.length; i++){
-      var currentCard1 = data[0].cards[i].code;
-      var currentCard2 = data[1].cards[i].code;
-      player1Cards.push(currentCard1);
-      player2Cards.push(currentCard2);
+      var codeCard1 = data[0].cards[i].code;
+      var codeCard2 = data[1].cards[i].code;
+      player1Cards.push(codeCard1);
+      player2Cards.push(codeCard2);
     }
     function flipCards(){
-      
-      var card1src = data[0].cards[card].image;
-      var card2src = data[1].cards[card].image;
+      if(card1 === numCards1-1){
+        card1 = 0;
+      }
+      if(card2 === numCards2-1){
+        card2 = 0;
+      }
+      var card1src = data[0].cards[card1].image;
+      var card2src = data[1].cards[card2].image;
       card1Img.src = card1src;
       card2Img.src = card2src;
       
       //compare two player's card values. Winner pushes the two cards to their array. Loser loses that card from array.
-      var card1num = data[0].cards[card].value;
-      var card2num = data[1].cards[card].value;
-  
-      if (card1num === "ACE"){
+      var card1numPlain = data[0].cards[card1].value;
+      var card2numPlain = data[1].cards[card2].value;
+      let card1num;
+      let card2num; 
+      if (card1numPlain === "ACE"){
         card1num = 1;
-      } else if (card1num === "JACK") {
+      } else if (card1numPlain === "JACK") {
         card1num = 11;
-      } else if (card1num === "QUEEN"){
+      } else if (card1numPlain === "QUEEN"){
         card1num = 12
-      } else if (card1num === "KING"){
+      } else if (card1numPlain === "KING"){
         card1num = 13;
-      } 
-      if (card2num === "ACE"){
-        card2num = 1;
-      } else if (card2num === "JACK") {
-        card2num = 11;
-      } else if (card2num === "QUEEN"){
-        card2num = 12
-      } else if (card2num === "KING"){
-        card2num = 13;
+      } else {
+        card1num = Number(card1numPlain);
       }
-      card1num = Number(card1num);
-      card2num = Number(card2num);
-   
 
+      if (card2numPlain === "ACE"){
+        card2num = 1;
+      } else if (card2numPlain === "JACK") {
+        card2num = 11;
+      } else if (card2numPlain === "QUEEN"){
+        card2num = 12
+      } else if (card2numPlain === "KING"){
+        card2num = 13;
+      } else {
+        card2num = Number(card2numPlain);
+      }
+    
+      
       if(card1num > card2num){
-        console.log("Player 1 Wins");
+        losingCard = data[1].cards[card2].code;
+        removeElement(player2Cards, losingCard);
+        player1Cards.push(losingCard);
       } else if (card1num < card2num){
-        console.log("Player 2 Wins");
+        losingCard = data[0].cards[card1].code;
+        removeElement(player1Cards, losingCard);
+        player2Cards.push(losingCard);
       } else {
         console.log("WAR");
       }
@@ -209,9 +224,16 @@ function makePiles(){
       if (numCards2 === 0){
 
       }
-      card++;
+      card1++;
+      card2++;
     }
     flipCardsBtn.addEventListener('click', flipCards);
   })
 }
 
+function removeElement(array, elem) {
+  var index = array.indexOf(elem);
+  if (index > -1) {
+      array.splice(index, 1);
+  }
+}

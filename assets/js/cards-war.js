@@ -22,6 +22,7 @@ let deckID;
 let player1Deck;
 let player2Deck;
 let losingCard;
+let winningCard;
 
 
 // GAME OPTIONS PAGE //
@@ -127,20 +128,24 @@ function savePlayerNames(){
 
 // GAME FUNCTIONALITY
 function startWarGame(){
+  //save player names, adjust what is visible on the page, and put the names in the name text areas
   savePlayerNames();
   gameOptionsDiv.classList.add("hidden");
   gameContainer.classList.remove("hidden");
   player1text.textContent = localStorage.getItem("player1");
   player2text.textContent = localStorage.getItem("player2");
+  //grab a deck from the deck of cards api
   var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
   fetch(cardDeckURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) { 
+      //store the current id to use the same deck for following calls
       deckID = data.deck_id;
-      player1Deck = "https://deckofcardsapi.com/api/deck/" + deckID+ "/draw/?count=26";
-      player2Deck = "https://deckofcardsapi.com/api/deck/" + deckID+ "/draw/?count=26";
+      player1Deck = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=26";
+      player2Deck = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=26";
+      //use the urls above to make two hands of 26 cards each from the same deck of 52
       makePiles();
     }) 
 }
@@ -152,36 +157,46 @@ function makePiles(){
   ]).then(function(data){
     const player1Cards = [];
     const player2Cards = [];
+    //will be used to increment the place in the array when flipping a card
     let card1 = 0;
     let card2 = 0;
     var numCards1 = player1Cards.length;
     var numCards2 = player2Cards.length;
+    //set up the arrays to hold the codes of the cards
     for(let i=0; i<data[0].cards.length; i++){
       var codeCard1 = data[0].cards[i].code;
       var codeCard2 = data[1].cards[i].code;
       player1Cards.push(codeCard1);
       player2Cards.push(codeCard2);
     }
+    //on click of the flip cards button
     function flipCards(){
+      console.log(player1Cards);
+      console.log(player2Cards);
+      //if we are at the end of the deck, loop back to the start of the array
       if(card1 === numCards1-1){
         card1 = 0;
       }
       if(card2 === numCards2-1){
         card2 = 0;
       }
+      //set up images to hold the current card for each player
       var card1src = data[0].cards[card1].image;
       var card2src = data[1].cards[card2].image;
       card1Img.src = card1src;
       card2Img.src = card2src;
+      //add alt text ie "2 HEARTS"
       card1Img.alt = data[0].cards[card1].value + " " + data[0].cards[card1].suit;
       card2Img.alt = data[1].cards[card2].value + " " + data[1].cards[card2].suit;
 
-      //flip cards animation
+      //flip cards animation, flip will occur on click of the button to show the card
       $(".flip-card-inner").css("transform", "rotateY(180deg)");
       
-      //compare two player's card values. Winner pushes the two cards to their array. Loser loses that card from array.
+      //compare two player's card values
+      //Plain variable is the string holding either a number or KING, QUEEN, JACK, or ACE
       var card1numPlain = data[0].cards[card1].value;
       var card2numPlain = data[1].cards[card2].value;
+      //we want to grab the corresponding number
       let card1num;
       let card2num; 
       if (card1numPlain === "ACE"){
@@ -195,7 +210,7 @@ function makePiles(){
       } else {
         card1num = Number(card1numPlain);
       }
-
+      //player 2's numbers
       if (card2numPlain === "ACE"){
         card2num = 1;
       } else if (card2numPlain === "JACK") {
@@ -207,29 +222,37 @@ function makePiles(){
       } else {
         card2num = Number(card2numPlain);
       }
-    
+      //wait 3 seconds after button is clicked, and then flip the card back over (show 'back' of next card)
       setTimeout(function() {
         $(".flip-card-inner").css("transform", "rotateY(0deg)");
       }, 3000)
-      
+      //conditionals for winning and losing the match
+      //player1 wins the two cards
       if(card1num > card2num){
         losingCard = data[1].cards[card2].code;
+        winningCard = data[0].cards[card1].code;
+        //remove the losing card from player 2's hand
         removeElement(player2Cards, losingCard);
-        player1Cards.push(losingCard);
+        //and give it to player 1
+        addElement(player1Cards, winningCard, losingCard)
+        console.log(player1Cards);
+        console.log(player2Cards);
+        // add highlighting around a second after the card shows, then remove it after another second
         setTimeout(() => {card1Img.classList.add("highlight")}, 1200);
         setTimeout(() => {card1Img.classList.remove("highlight")}, 2200);
-      } else if (card1num < card2num){
+      } else if (card1num < card2num){ //player 2 wins the two cards
         losingCard = data[0].cards[card1].code;
+        winningCard = data[1].cards[card2].code;
         removeElement(player1Cards, losingCard);
-        player2Cards.push(losingCard);
+        addElement(player2Cards, winningCard, losingCard)
+        console.log(player1Cards);
+        console.log(player2Cards);
         setTimeout(() => {card2Img.classList.add("highlight")}, 1200);
         setTimeout(() => {card2Img.classList.remove("highlight")}, 2200);
-      } else {
+      } else { //tie and war breaks out per game rules
         console.log("WAR");
       }
       //check each array. If length is 0, they lose.
-      //highlight winning card in green and brief animation
-      //conditional for WAR
       if (numCards1 === 0){
 
       }
@@ -247,5 +270,12 @@ function removeElement(array, elem) {
   var index = array.indexOf(elem);
   if (index > -1) {
       array.splice(index, 1);
+  }
+}
+
+function addElement(array, elem, item) {
+  var index = array.indexOf(elem);
+  if (index > -1) {
+      array.splice(index, 0, item);
   }
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Play Me</title>
+    <title>Play Me Favorites</title>
     <meta
       name="description"
       content="A game and activity generator for when you are bored!"
@@ -34,18 +34,20 @@
     ></script>
   </head>
   <body class = "center-align teal-text">
-    <h2>Welcome to Play Me</h2>
-    <div>
-      <p>
-        Play Me is an activity generator for those moments when you want
-        something to do, but can't decide on exactly what.
-      </p>
-      <p>
-        Select from the options below to choose between a card game or a randomly selected fun activity.
-      </p>
-    </div>
+     <h2>Favorite Activities</h2>
+      <div>
+        <p>Click on one of the cards below to return to one of your favorite activities.</p>
+      </div>
+       <!-- this is a list of links to favorite activities. When an activity is save the activity name will appear.  When the link is clicked it will be called from storage. -->
+      <div class="collection">
+        <a href="#!" class="collection-item">Activity1</a>
+        <a href="#!" class="collection-item">Activity2</a>
+        <a href="#!" class="collection-item">Activity3</a>
+        <a href="#!" class="collection-item">Activity4</a>
+        <a href="#!" class="collection-item">Activity5</a>
+      </div>
 
-           
+      
       <!-- This is a sample card that was created for the sole purpose of trying to get issue six working this may be deleted or modified as needed.  This card can contain an image but does not at the moment-->
       <div class="row">
         <div class="col s12 m7">
@@ -57,7 +59,6 @@
             <div class="card-content">
               <p> Price: <span id="price"></span></p>
               <p></p>
-              
             </div>
             <div class="card-action">
               <a id = fvBtn href="#">Save to Favorites</a>

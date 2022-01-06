@@ -130,7 +130,6 @@ function startWarGame(){
   gameContainer.classList.remove("hidden");
   player1text.textContent = localStorage.getItem("player1");
   player2text.textContent = localStorage.getItem("player2");
-  flipCardsBtn.addEventListener('click', flipCards);
   var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
   fetch(cardDeckURL)
     .then(function (response) {
@@ -142,51 +141,41 @@ function startWarGame(){
       player2Deck = "https://deckofcardsapi.com/api/deck/" + deckID+ "/draw/?count=26";
       makePiles();
     }) 
-  function makePiles(){
-    Promise.all([
-      fetch(player1Deck).then(resp => resp.json()),
-      fetch(player2Deck).then(resp => resp.json())
-    
-    ]).then(function(data){
-      console.log(data);
-    })
-    // fetch(player1PileURL)
-    //   .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (data) { 
-    //     console.log(data);
-        
-        
-    //   }) 
-    // fetch(player2PileURL)
-    //   .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (data) { 
-    //     console.log(data);
-      
-        
-    //   }) 
-  }
- 
-
 }
 
-function flipCards(){
-  // var cardDeckURL = "https://deckofcardsapi.com/api/deck/new/draw/?count=2";
-  // fetch(cardDeckURL)
-  //   .then(function (response) {
-  //     return response.json();
-  //   })
-  //   .then(function (data) { 
-  //     console.log(data);
-  //     var deckID = data.deck_id;
-  //     var card1src = data.cards[0].image;
-  //     var card2src = data.cards[1].image;
-  //     card1Img.src = card1src;
-  //     card2Img.src = card2src;
+function makePiles(){
+  Promise.all([
+    fetch(player1Deck).then(resp => resp.json()),
+    fetch(player2Deck).then(resp => resp.json())
+  ]).then(function(data){
+    const player1Cards = [];
+    const player2Cards = [];
+    let card = 0;
+    let numCards1 = player1Cards.length;
+    let numCards2 = player2Cards.length;
+    for(let i=0; i<data[0].cards.length; i++){
+      var currentCard1 = data[0].cards[i].code;
+      var currentCard2 = data[1].cards[i].code;
+      player1Cards.push(currentCard1);
+      player2Cards.push(currentCard2);
+    }
+    function flipCards(){
       
-  //   }) 
+      var card1src = data[0].cards[card].image;
+      var card2src = data[1].cards[card].image;
+      card1Img.src = card1src;
+      card2Img.src = card2src;
+      card++;
+      //compare two player's card values. Winner pushes the two cards to their array. Loser loses that card from array.
+      //check each array. If length is 0, they lose.
+      if (numCards1 === 0){
+
+      }
+      if (numCards2 === 0){
+        
+      }
+    }
+    flipCardsBtn.addEventListener('click', flipCards);
+  })
 }
 

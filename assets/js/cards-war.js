@@ -23,8 +23,8 @@ let player1Deck;
 let player2Deck;
 let losingCard;
 let winningCard;
-const player1Cards = [];
-const player2Cards = [];
+let player1Cards = [];
+let player2Cards = [];
 
 
 // GAME OPTIONS PAGE //
@@ -203,6 +203,7 @@ function startWarGame(){
         //flip a card on button click
         flipCardsBtn.addEventListener('click', flipCards);
         function flipCards(){
+          function setUpCards(){
           //set up images to hold the current card for each player
           var card1src = deck1.cards[card1].image;
           var card2src = deck2.cards[card2].image;
@@ -214,7 +215,8 @@ function startWarGame(){
 
           //flip cards animation, flip will occur on click of the button to show the card
           $(".flip-card-inner").css("transform", "rotateY(180deg)");
-          
+          }
+          setUpCards();
           //compare two player's card values
           //Plain variable is the string holding either a number or KING, QUEEN, JACK, or ACE
           var card1numPlain = deck1.cards[card1].value;
@@ -258,22 +260,20 @@ function startWarGame(){
             removeElement(player2Cards, losingCard);
             //and give it to player 1
             addElement(player1Cards, winningCard, losingCard)
-            console.log(player1Cards);
-            console.log(player2Cards);
             // add highlighting around a second after the card shows, then remove it after another second
             setTimeout(() => {card1Img.classList.add("highlight")}, 1200);
             setTimeout(() => {card1Img.classList.remove("highlight")}, 4200);
-            
+            console.log(player1Cards);
+            console.log(player2Cards);
           } else if (card1num < card2num){ //player 2 wins the two cards
             losingCard = deck1.cards[card1].code;
             winningCard = deck2.cards[card2].code;
             removeElement(player1Cards, losingCard);
-            addElement(player2Cards, winningCard, losingCard)
-            console.log(player1Cards);
-            console.log(player2Cards);
+            addElement(player2Cards, winningCard, losingCard);
             setTimeout(() => {card2Img.classList.add("highlight")}, 1200);
             setTimeout(() => {card2Img.classList.remove("highlight")}, 2200);
-            
+            console.log(player1Cards);
+            console.log(player2Cards);
           } else { //tie and war breaks out per game rules
             console.log("WAR");
             //sound effects?
@@ -281,41 +281,57 @@ function startWarGame(){
           
           card1++;
           card2++;
-          var numCards1 = player1Cards.length;
-          var numCards2 = player2Cards.length;
+          var numCards1 = player1Cards.length-1;
+          var numCards2 = player2Cards.length-1;
           
           //if we are at the end of the deck, loop back to the start of the array
           if(card1 === 3){
+            //take current array and put in in a string to use in the api call
             var cardString1 = player1Cards.toString();
             card1 = 0;
             
-            //flip a card on button click
-            flipCardsBtn.addEventListener('click', flipCards);
-            player1Deck = "https://deckofcardsapi.com/api/deck/" + deckID + "/shuffle/?cards=" + cardString1;
+            
+            //use the updated cardString to get a new deckID
+            player1Deck = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=" + cardString1;
             fetchDeck1().then(deck=> {
+              //save the new deckID
               deckID = deck.deck_id;
               let num = deck.remaining;
               shuffledCards1 = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=" + num;
               fetchCards1().then(cards => {
+                // clear the array
+                player1Cards = [];
+                //set up array to hold the codes of the cards
+                for(let i=0; i<cards.cards.length; i++){
+                  var codeCard1 = cards.cards[i].code;
+                  player1Cards.push(codeCard1);
+                }
+                //flip a card on button click
+                flipCardsBtn.addEventListener('click', flipCards);
                 console.log(cards); 
               }); 
-                 //set up arrays to hold the codes of the cards
-              for(let i=0; i<deck1.cards.length; i++){
-                var codeCard1 = deck1.cards[i].code;
-                var codeCard2 = deck2.cards[i].code;
-                player1Cards.push(codeCard1);
-                player2Cards.push(codeCard2);
-              }
+              
             });
           }
-          if(card2 === numCards2-1){
+          if(card2 === 4){
             var cardString2 = player2Cards.toString();
             card2 = 0;
-            player2Deck = "https://deckofcardsapi.com/api/deck/" + deckID + "/shuffle/?cards=" + cardString2;
+            player2Deck = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=" + cardString2;
             fetchDeck2().then(deck => {
-              console.log(deck); 
+              deckID = deck.deck_id;
+              let num = deck.remaining;
+              shuffledCards2 = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=" + num;
               fetchCards2().then(cards => {
-                console.log(cards); 
+                 // clear the array
+                 player2Cards = [];
+                 //set up array to hold the codes of the cards
+                 for(let i=0; i<cards.cards.length; i++){
+                   var codeCard2 = cards.cards[i].code;
+                   player2Cards.push(codeCard2);
+                 }
+                 //flip a card on button click
+                 flipCardsBtn.addEventListener('click', flipCards);
+                 console.log(cards); 
               }); 
             });            
           }

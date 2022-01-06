@@ -5,3 +5,35 @@
   --accent: #b9c6ae;
   --other: #12ae33
 }
+
+body {
+  height: 100%;
+}
+
+.inline {
+  display: inline;
+}
+
+header {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+header a {
+  color: inherit;
+}
+
+#headerText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding:0 2%;
+}
+
+
+
+

@@ -251,13 +251,19 @@ function makePiles(){
         setTimeout(() => {card2Img.classList.remove("highlight")}, 2200);
       } else { //tie and war breaks out per game rules
         console.log("WAR");
+        //sound effects?
       }
       //check each array. If length is 0, they lose.
       if (numCards1 === 0){
+        //COMPUTER/NAME(p2) WINS
+        //have a p in HTML with winning message. hide the losing person's card image so its a blank space
+        //confetti effect if time or something fun
+        //sound effects?
 
       }
       if (numCards2 === 0){
-
+        //if player2 name is Computer, YOU WIN
+        //if playing a friend, NAME(p1) WINS
       }
       card1++;
       card2++;

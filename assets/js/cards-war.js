@@ -115,6 +115,7 @@ function savePlayerNames(){
 
   //Put names into local storage
   localStorage.setItem("player1", player1);
+  //if single player, save Computer as the second name
   if(player2){
     localStorage.setItem("player2", player2)
   } else {
@@ -165,15 +166,50 @@ function makePiles(){
       var card2src = data[1].cards[card].image;
       card1Img.src = card1src;
       card2Img.src = card2src;
-      card++;
+      
       //compare two player's card values. Winner pushes the two cards to their array. Loser loses that card from array.
+      var card1num = data[0].cards[card].value;
+      var card2num = data[1].cards[card].value;
+  
+      if (card1num === "ACE"){
+        card1num = 1;
+      } else if (card1num === "JACK") {
+        card1num = 11;
+      } else if (card1num === "QUEEN"){
+        card1num = 12
+      } else if (card1num === "KING"){
+        card1num = 13;
+      } 
+      if (card2num === "ACE"){
+        card2num = 1;
+      } else if (card2num === "JACK") {
+        card2num = 11;
+      } else if (card2num === "QUEEN"){
+        card2num = 12
+      } else if (card2num === "KING"){
+        card2num = 13;
+      }
+      card1num = Number(card1num);
+      card2num = Number(card2num);
+   
+
+      if(card1num > card2num){
+        console.log("Player 1 Wins");
+      } else if (card1num < card2num){
+        console.log("Player 2 Wins");
+      } else {
+        console.log("WAR");
+      }
       //check each array. If length is 0, they lose.
+      //highlight winning card in green and brief animation
+      //conditional for WAR
       if (numCards1 === 0){
 
       }
       if (numCards2 === 0){
-        
+
       }
+      card++;
     }
     flipCardsBtn.addEventListener('click', flipCards);
   })

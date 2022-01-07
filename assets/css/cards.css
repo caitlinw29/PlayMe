@@ -158,3 +158,27 @@ h1 {
     font-size: 80%;
   }
 }
+
+@media only screen and (max-width: 350px){
+  #flipCardBtn {
+    font-size: 80%;
+    text-align: left;
+    padding: 0px;
+  }
+
+  #war-game-container p {
+    font-size: 100%;
+  }
+
+  #card1, 
+  #card2,
+  #war-game-container img {
+    width: 100px;
+    height: 150px;
+  } 
+  .flip-card {
+    width: 100px;
+    height: 150px;
+  }
+  
+}

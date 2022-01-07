@@ -30,42 +30,82 @@
       referrerpolicy="no-referrer"
     ></script>
   </head>
-  <body class = "center-align teal-text">
-    <h2>Welcome to Play Me</h2>
-    <div>
-      <p>
-        Play Me is an activity generator for those moments when you want
-        something to do, but can't decide on exactly what.
-      </p>
-      <p>
-        Select from the options below to choose between a card game or a randomly selected fun activity.
-      </p>
-    </div>
-
-           
-      <!-- This is a sample card that was created for the sole purpose of trying to get issue six working this may be deleted or modified as needed.  This card can contain an image but does not at the moment-->
-      <div class="row">
-        <div class="col s12 m7">
-          <div class= "card">
-            <div class="card-image"> 
-              <img src="./assets/img/favicon.ico" width="100px" height="100px">
-              <span class="card-title black-text" id = "cardTitle" >Card Title</span>
-            </div>
-            <div class="card-content">
-              <p> Activity: <span id="activity">Name</span></p>
-              <p> Price: <span id="price"></span></p>
-              <p> Type: <span id="type"></span></p>
-              <p> Participants: <span id="price"></span></p>
-              <p> Key: <span id="key">1234567</span></p>
-            </div>
-            <div class="card-action">
-              <a id = fvBtn href="#">Save to Favorites</a>
-            </div>
+  <body class = "center-align teal-text cyan lighten-5">
+    <div class="teal lighten-2">
+      <div class="container" id="collage">
+        <div class="row">
+          <div class="col m3 s7">
+            <img src="./assets/img/book-g67875f74e_640.jpg" alt="">
+          </div>
+          <div class="col m4 s5">
+            <img src="./assets/img/poker-g430db2fe5_640.jpg" alt="">
+          </div>
+          <div class="col m3 hide-images">
+            <img src="./assets/img/game-gdb3392e3b_640.jpg" alt="">
+          </div>
+          <div class="col m2 hide-images">
+            <img src="./assets/img/guitar-gabd69ee38_640.jpg" alt="">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m2 s4">
+            <img src="./assets/img/spaghetti-gebbbdba97_640.jpg" alt="">
+          </div>
+          <div class="col m3 hide-images">
+            <img src="./assets/img/tic-tac-toe-gff1a88fe8_640.jpg" alt="">
+          </div>
+          <div class="col m2 s4">
+            <img src="./assets/img/kid-g3fd32e617_640.jpg" alt="">
+          </div>
+          <div class="col m2 hide-images">
+            <img src="./assets/img/child-g60017d035_640.jpg" alt="">
+          </div>
+          <div class="col m3 s4">
+            <img src="./assets/img/bicycle-g3536efd99_640.jpg" alt="">
           </div>
         </div>
       </div>
-
-    
+    </div>
+    <h2>Welcome to PlayMe</h2>
+    <div class="center-align" id="description">
+      <p>
+        PlayMe lets you peruse activities during those moments of boredom where you can't quite decide what to do.
+      </p>
+      <p>
+        Choose between a randomly selected fun activity or a card game below.
+      </p>
+    </div>
+    <div class="container" id="cards">
+      <div class="row">
+        <div class="col s12 m5">
+          <a href="./activity-gen.html">
+            <div class="card blue-grey darken-1">
+              <div class="card-image">
+                <img src="./assets/img/choice.jpg" height="200px">
+              </div>
+              <div class="card-action white-text">
+                <h3 class="card-title">Activity Generator</h3>
+                <p>Bored? Find random activity ideas!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col m2"></div>
+        <div class="col s12 m5">
+          <a href="./cards-war.html">
+            <div class="card blue-grey darken-1">
+              <div class="card-image">
+                <img src="./assets/img/card-game.jpg" height="200px">
+              </div>
+              <div class="card-action white-text">
+                <h3 class="card-title">Card Games</h3>
+                <p>Play a card game!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"

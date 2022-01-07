@@ -232,8 +232,10 @@ function startWarGame(){
             setTimeout(() => {card2Img.classList.add("highlight")}, 1000);
             setTimeout(() => {card2Img.classList.remove("highlight")}, 2000);
           } else {
-            vs.textContent = "Tie!";
-            setTimeout(() => {vs.textContent = "VS"}, 2000);
+            if (window.location.href.indexOf("cards-war") > -1) {
+              vs.textContent = "Tie!";
+              setTimeout(() => {vs.textContent = "VS"}, 2000);
+            }
           }
           //set the scores as text content on the page
           player1score.textContent = score1;
@@ -271,18 +273,3 @@ function startWarGame(){
       }) 
     });
 }
-
-//check size of screen on load - if they resize as they play, they'll have to refresh 
-function checkMediaQuery() {
-  // If the inner width of the window is less than 500px
-  if (window.innerWidth < 500) {
-    // Then log this message to the console
-    location.href = "./mobile-war.html";
-  }
-}
-//avoid getting stuck in an endless load mobile html, load js, load mobile again loop
-//only run function if it's not already mobile
-if (location.href != "./mobile-war.html"){
-  checkMediaQuery();
-}
-

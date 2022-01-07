@@ -70,6 +70,10 @@
   padding: 0;
 }
 
+.card {
+  text-align: center;
+}
+
 @media only screen and (min-width: 1500px){
   #collage img,
   .row div{
@@ -80,6 +84,12 @@
 @media only screen and (min-width: 1000px) and (max-width: 1499px){
   #collage img,
   .row div{
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 999px){
+  .card-image img {
     height: 150px;
   }
 }

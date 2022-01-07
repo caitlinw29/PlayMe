@@ -54,10 +54,11 @@
 
     <div class="container hidden" id="war-game-container">
       <!--1st Row-->
-      <div class="row">
+      <div class="row cyan lighten-4">
         <!--1st column top left-->
         <div class="col s6">
           <p id="player1"></p>
+          <p id="player1score"></p>
         </div>
         <!-- 2nd column top right-->
         <div class="col s6">
@@ -74,25 +75,17 @@
         </div>
       </div> 
 
-      <!-- 2nd row-->
-      <div class="row">
-        <!-- 1st column left   -->
-        <div class="col s6">
-          <p id="player1score"></p>
-        </div>
-      </div>
-
-      <!--Third row-->
+      <!--Second row-->
       <div class="row">
         <!--1st column offset to middle-->
         <div class="col s4 offset-s4">
-          <button class="btn-large" id="flipCardBtn">Flip Cards</button>
+          <p id="vs" class="inline"></p>
+          <button class="btn-large inline" id="flipCardBtn">Flip Cards</button>
         </div>
       </div> 
-    
 
-      <!--Fourth row-->
-      <div class="row">
+      <!--Third row-->
+      <div class="row cyan lighten-3">
         <!--1st column left-->
         <div class="col s6">
           <div class="flip-card">
@@ -109,14 +102,6 @@
         <!-- 2nd column right-->
         <div class="col s6">
           <p id="player2"></p>
-        </div>
-      </div>
-      
-
-      <!--Fifth row-->
-      <div class="row">
-        <!--1st column bottom right, offset-->
-        <div class="col s6 offset-6">
           <p id="player2score"></p>
         </div>
       </div>

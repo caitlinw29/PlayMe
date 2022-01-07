@@ -13,7 +13,6 @@ const instructions = document.getElementById("instructions");
 const player1text = document.getElementById("player1");
 const player2text = document.getElementById("player2");
 const flipCardsBtn = document.getElementById("flipCardBtn");
-const battleBtn = document.getElementById("battleBtn");
 const card1Img= document.getElementById("card1");
 const card2Img = document.getElementById("card2");
 const vs = document.getElementById("vs");
@@ -29,15 +28,8 @@ let player2;
 let deckID;
 let player1Deck;
 let player2Deck;
-let losingCard;
-let winningCard;
-let player1Cards = [];
-let player2Cards = [];
 let card1num;
 let card2num;
-
-
-
 
 // GAME OPTIONS PAGE //
 
@@ -176,19 +168,13 @@ function startWarGame(){
       player2Deck = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=26";
       //use the urls above to make two hands of 26 cards each, from the same deck of 52
       fetchDecks().then(([deck1, deck2]) => {
-        //set up arrays to hold the codes of the cards
-        for(let i=0; i<deck1.cards.length; i++){
-          var codeCard1 = deck1.cards[i].code;
-          var codeCard2 = deck2.cards[i].code;
-          player1Cards.push(codeCard1);
-          player2Cards.push(codeCard2);
-        }
-        //will be used to increment the place in the array when flipping a card
+        //will be used to increment the current card index when flipping cards
         let card1 = 0;
         let card2 = 0;
         //flip a card on button click
         flipCardsBtn.addEventListener('click', flipCards);
         function flipCards(){
+          flipCardsBtn.disabled = true;
           //set up images to hold the current card for each player
           var card1src = deck1.cards[card1].image;
           var card2src = deck2.cards[card2].image;
@@ -235,27 +221,30 @@ function startWarGame(){
           }, 2000)
           
           //conditionals for winning and losing the match
-          //player1 wins the two cards
+          //player1 wins
           if(card1num > card2num){
             score1++;
             // add highlighting after a second, then remove it after another second
             setTimeout(() => {card1Img.classList.add("highlight")}, 1000);
             setTimeout(() => {card1Img.classList.remove("highlight")}, 2000);
-            
-          } else if (card1num < card2num){ //player 2 wins the two cards
-            
+          } else if (card1num < card2num){ //player 2 wins
             score2++;
             setTimeout(() => {card2Img.classList.add("highlight")}, 1000);
-            setTimeout(() => {card2Img.classList.remove("highlight")}, 3000);
+            setTimeout(() => {card2Img.classList.remove("highlight")}, 2000);
           } else {
             vs.textContent = "Tie!";
             setTimeout(() => {vs.textContent = "VS"}, 2000);
           }
+          //set the scores as text content on the page
           player1score.textContent = score1;
           player2score.textContent = score2;
+
+          //let user click button again after the transitions end
+          setTimeout(() => {flipCardsBtn.disabled=false}, 2000);
           
           //end the game on the 26th card
           if (card1 === 25 && card2 === 25){
+            //give two seconds so they can see the card first
             setTimeout(() => {
               gameContainer.classList.add("hidden");
               if (score1 > score2){
@@ -275,6 +264,7 @@ function startWarGame(){
             }, 2000);
             return;
           }
+          //increment for index in the data
           card1++;
           card2++;
         };

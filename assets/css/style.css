@@ -57,6 +57,15 @@
   margin: 0px;
   padding: 0px;
 }
+.card-title {
+  color: black;
+}
+.row {
+  align-content: center;
+}
+.card {
+  align-content: center;
+}
 
 .row div{
   height: 100px;

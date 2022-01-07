@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Play Me - Activity Generator</title>
-    <meta name="description" content="A game and activity generator for when you are bored!">
+    <meta name="description" content="Randomly generated activities!">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
     <!--Add a google font if desired-->
@@ -23,6 +23,7 @@
     />
     <link rel="stylesheet" href="./assets/css/normalize.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/activity-gen.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
       integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
@@ -31,7 +32,12 @@
     ></script>
   </head>
   <body class = "center-align teal-text cyan lighten-5">
-    
+    <div id="titleAndBtn">
+      <a href="./activity-gen.html" id="activitygenLink">
+        <h1>Activity Generator</h1>
+      </a>
+      <button class="btn-large" id="findActivityBtn">Find an Activity!</button>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -46,5 +52,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js" async defer></script>
+    <script src="./assets/js/activity-gen.js" async defer></script>
   </body>
 </html>

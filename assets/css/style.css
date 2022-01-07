@@ -84,3 +84,10 @@
   }
 }
 
+@media only screen and (max-width: 600px){
+  .hide-images{
+    display: none;
+  }
+}
+
+

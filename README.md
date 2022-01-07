@@ -93,14 +93,7 @@ This project is licensed under: [MIT](https://opensource.org/licenses/MIT)
 
 ## Contribution
 
-Caitlin Wall, Michael Rawlings, Brandon Latson, and Matthew Johns
-
-## Contact
-
-* Email : caitlinwall96@gmail.com, 
-          rawlingsm99@gmail.com,
-          latson@gmail.com, 
-          m_johns@hotmail.com
+[Caitlin Wall](https://github.com/caitlinw29), [Michael Rawlings](https://github.com/Mikerawl), [Brandon Latson](https://github.com/bclatson), and [Matthew Johns](https://github.com/mjohnsbootcamp)
     
 ## Presentation Link
 

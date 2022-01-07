@@ -43,7 +43,7 @@ h1 {
 #gameOptions input {
   margin-left: 2.5%;
   margin-bottom: 2.5%;
-  width: 25%;
+  width: 30%;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -142,4 +142,11 @@ h1 {
 
 .flip-card-back {
   transform: rotateY(180deg);
+}
+
+@media only screen and (max-width: 600px){
+  #overlay-text{
+    width: 80%; 
+    font-size: 100%;
+  }
 }

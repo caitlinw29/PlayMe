@@ -1,8 +1,86 @@
-/*Decide on root color scheme*/ 
-:root {
-  --dark: #a0a0a0;
-  --light: #fff;
-  --accent: #b9c6ae;
-  --other: #12ae33
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.row {
+  margin: 0px;
+  padding: 0px;
+}
+
+.row div{
+  height: 100px;
+  padding: 0px !important;
+}
+
+#collage img{
+  height: 100px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (min-width: 1500px){
+  #collage img,
+  .row div{
+    height: 200px;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1499px){
+  #collage img,
+  .row div{
+    height: 150px;
+  }
 }
 

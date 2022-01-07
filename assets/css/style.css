@@ -26,6 +26,11 @@ header a {
   color: inherit;
 }
 
+header a:hover{
+  cursor: pointer;
+  color: rgb(6, 73, 104);
+}
+
 #headerText {
   display: flex;
   justify-content: space-between;
@@ -34,6 +39,6 @@ header a {
   padding:0 2%;
 }
 
-
-
-
+#btnhome:active{
+  line-height : 25px;
+}

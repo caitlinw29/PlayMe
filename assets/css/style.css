@@ -1,60 +1,25 @@
+/*DESCRIPTION AND CARDS*/
+.card {
+  text-align: center;
+}
 
+.card-action h3 {
+  font-size: 2.5rem !important;
+}
 
+.card-action p {
+  font-size: 1.5rem;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#cards a .card:hover {
+    box-shadow: 0px 0px 10px 10px #1de9b6;
+}
 
 #description p:nth-child(2) {
   margin-bottom: 5%;
 }
 
-
+/* COLLAGE */
 #collage .row {
   margin: 0px;
   padding: 0px;
@@ -70,10 +35,6 @@
   width: 100%;
   margin: 0;
   padding: 0;
-}
-
-.card {
-  text-align: center;
 }
 
 @media only screen and (min-width: 1500px){

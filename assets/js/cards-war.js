@@ -193,7 +193,7 @@ function startWarGame(){
           var card2numPlain = deck2.cards[card2].value;
           //we want to grab the corresponding number 
           if (card1numPlain === "ACE"){
-            card1num = 1;
+            card1num = 14;
           } else if (card1numPlain === "JACK") {
             card1num = 11;
           } else if (card1numPlain === "QUEEN"){
@@ -205,7 +205,7 @@ function startWarGame(){
           }
           //player 2's numbers
           if (card2numPlain === "ACE"){
-            card2num = 1;
+            card2num = 14;
           } else if (card2numPlain === "JACK") {
             card2num = 11;
           } else if (card2numPlain === "QUEEN"){

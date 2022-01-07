@@ -16,6 +16,13 @@ const flipCardsBtn = document.getElementById("flipCardBtn");
 const battleBtn = document.getElementById("battleBtn");
 const card1Img= document.getElementById("card1");
 const card2Img = document.getElementById("card2");
+const vs = document.getElementById("vs");
+const player1score = document.getElementById("player1score");
+const player2score = document.getElementById("player2score");
+const winner = document.getElementById("winner");
+const finalScore = document.getElementById("finalScore");
+const playAgainBtn = document.getElementById("playAgain");
+const homeBtn = document.getElementById("homeBtn");
 let overlayVisible = false;
 let player1;
 let player2;
@@ -28,6 +35,8 @@ let player1Cards = [];
 let player2Cards = [];
 let card1num;
 let card2num;
+
+
 
 
 // GAME OPTIONS PAGE //
@@ -145,37 +154,11 @@ async function fetchDecks() {
   return [deckcards1, deckcards2];
 }
 
-//set up individual calls for when the player hits the bottom of their deck;
-async function fetchDeck1() {
-  const response = await fetch(player1Deck);
-  const deck = await response.json();
-  return deck;
-}
-
-
-async function fetchDeck2() {
-  const response = await fetch(player2Deck);
-  const deck = await response.json();
-  return deck;
-}
-
-async function fetchCards1() {
-  const response = await fetch(shuffledCards1);
-  const cards = await response.json();
-  return cards;
-}
-
-
-async function fetchCards2() {
-  const response = await fetch(shuffledCards2);
-  const cards = await response.json();
-  return cards;
-}
-
-
 function startWarGame(){
-  //save player names, adjust what is visible on the page, and put the names in the name text areas
+  //save player names, refresh scores, adjust what is visible on the page, and put the names in the name text areas
   savePlayerNames();
+  let score1 = 0;
+  let score2 = 0;
   gameOptionsDiv.classList.add("hidden");
   gameContainer.classList.remove("hidden");
   player1text.textContent = localStorage.getItem("player1");
@@ -206,7 +189,6 @@ function startWarGame(){
         //flip a card on button click
         flipCardsBtn.addEventListener('click', flipCards);
         function flipCards(){
-          
           //set up images to hold the current card for each player
           var card1src = deck1.cards[card1].image;
           var card2src = deck2.cards[card2].image;
@@ -218,7 +200,6 @@ function startWarGame(){
 
           //flip cards animation, flip will occur on click of the button to show the card
           $(".flip-card-inner").css("transform", "rotateY(180deg)");
-          
           
           //compare two player's card values
           //Plain variable is the string holding either a number or KING, QUEEN, JACK, or ACE
@@ -248,119 +229,56 @@ function startWarGame(){
           } else {
             card2num = Number(card2numPlain);
           }
-          //wait 3 seconds after button is clicked, and then flip the card back over (show 'back' of next card)
+          //wait a couple seconds after button is clicked, and then flip the card back over (show 'back' of next card)
           setTimeout(function() {
             $(".flip-card-inner").css("transform", "rotateY(0deg)");
-          }, 2500)
+          }, 2000)
           
           //conditionals for winning and losing the match
           //player1 wins the two cards
           if(card1num > card2num){
-            losingCard = deck2.cards[card2].code;
-            winningCard = deck1.cards[card1].code;
-            //remove the losing card from player 2's hand
-            removeElement(player2Cards, losingCard);
-            //and give it to player 1
-            addElement(player1Cards, winningCard, losingCard)
-            // add highlighting around a second after the card shows, then remove it after another second
-            setTimeout(() => {card1Img.classList.add("highlight")}, 1200);
-            setTimeout(() => {card1Img.classList.remove("highlight")}, 3900);
-            console.log(player1Cards);
-            console.log(player2Cards);
+            score1++;
+            // add highlighting after a second, then remove it after another second
+            setTimeout(() => {card1Img.classList.add("highlight")}, 1000);
+            setTimeout(() => {card1Img.classList.remove("highlight")}, 2000);
+            
           } else if (card1num < card2num){ //player 2 wins the two cards
-            losingCard = deck1.cards[card1].code;
-            winningCard = deck2.cards[card2].code;
-            removeElement(player1Cards, losingCard);
-            addElement(player2Cards, winningCard, losingCard);
-            setTimeout(() => {card2Img.classList.add("highlight")}, 1200);
-            setTimeout(() => {card2Img.classList.remove("highlight")}, 3900);
-            console.log(player1Cards);
-            console.log(player2Cards);
-          } 
+            
+            score2++;
+            setTimeout(() => {card2Img.classList.add("highlight")}, 1000);
+            setTimeout(() => {card2Img.classList.remove("highlight")}, 3000);
+          } else {
+            vs.textContent = "Tie!";
+            setTimeout(() => {vs.textContent = "VS"}, 2000);
+          }
+          player1score.textContent = score1;
+          player2score.textContent = score2;
+          
+          //end the game on the 26th card
+          if (card1 === 25 && card2 === 25){
+            setTimeout(() => {
+              gameContainer.classList.add("hidden");
+              if (score1 > score2){
+                winner.textContent = localStorage.getItem("player1") + " WINS!";
+              } else if (score2 > score1){
+                winner.textContent = localStorage.getItem("player2") + " WINS!";
+              } else {
+                winner.textContent = "TIE!"
+              }
+              finalScore.classList.remove("hidden");
+              playAgainBtn.addEventListener('click', function(){
+                location.href = "./cards-war.html";
+              })
+              homeBtn.addEventListener('click', function(){
+                location.href = "./index.html";
+              })
+            }, 2000);
+            return;
+          }
           card1++;
           card2++;
-          var numCards1 = player1Cards.length-1;
-          var numCards2 = player2Cards.length-1;
-          
-          //if we are at the end of the deck, shuffle the cards and keep going
-          if(card1 === numCards1){
-            //take current array and put in in a string to use in the api call
-            var cardString1 = player1Cards.toString();
-            card1 = 0;
-            //use the updated cardString to get a new deckID
-            player1Deck = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=" + cardString1;
-            fetchDeck1().then(deck=> {
-              //save the new deckID
-              deckID = deck.deck_id;
-              let num = deck.remaining;
-              shuffledCards1 = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=" + num;
-              fetchCards1().then(cards => {
-                // clear the array
-                player1Cards = [];
-                //set up array to hold the codes of the cards
-                for(let i=0; i<cards.cards.length; i++){
-                  var codeCard1 = cards.cards[i].code;
-                  player1Cards.push(codeCard1);
-                }
-                //flip a card on button click
-                flipCardsBtn.addEventListener('click', flipCards);
-              }); 
-              
-            });
-          }
-          if(card2 === numCards2){
-            var cardString2 = player2Cards.toString();
-            card2 = 0;
-            player2Deck = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=" + cardString2;
-            fetchDeck2().then(deck => {
-              deckID = deck.deck_id;
-              let num = deck.remaining;
-              shuffledCards2 = "https://deckofcardsapi.com/api/deck/" + deckID + "/draw/?count=" + num;
-              fetchCards2().then(cards => {
-                 // clear the array
-                 player2Cards = [];
-                 //set up array to hold the codes of the cards
-                 for(let i=0; i<cards.cards.length; i++){
-                   var codeCard2 = cards.cards[i].code;
-                   player2Cards.push(codeCard2);
-                 }
-                 //flip a card on button click
-                 flipCardsBtn.addEventListener('click', flipCards);
-                 console.log(cards); 
-              }); 
-            });            
-          }
-          //check each array. If cards remaining is 0, that player loses.
-          if (player1Cards.length === 0){
-            console.log("CPU wins!");
-            player2win();
-            //COMPUTER/NAME(p2) WINS
-            //have a p in HTML with winning message. hide the losing person's card image so its a blank space
-            //confetti effect if time or something fun
-            //sound effects?
-
-          }
-          if (player2Cards.length === 0){
-            console.log("Caitlin wins!")
-            player1win();
-            //if player2 name is Computer, YOU WIN
-            //if playing a friend, NAME(p1) WINS
-          }
         };
       }) 
     });
 }
 
-function removeElement(array, elem) {
-  var index = array.indexOf(elem);
-  if (index > -1) {
-      array.splice(index, 1);
-  }
-}
-
-function addElement(array, elem, item) {
-  var index = array.indexOf(elem);
-  if (index > -1) {
-      array.splice(index, 0, item);
-  }
-}

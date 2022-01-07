@@ -17,7 +17,10 @@ h1 {
 
 #player1, 
 #player2, 
-#vs {
+#vs,
+#player1score,
+#player2score,
+#winner {
   font-size: 2rem;
 }
 
@@ -46,7 +49,8 @@ h1 {
 }
 
 /* BUTTONS */
-#opponentChoice button {
+#opponentChoice button,
+#finalScore button {
   margin: 2.5% 2.5% 5%;
 }
 

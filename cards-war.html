@@ -97,11 +97,27 @@
 
         <!--Third row-->
         <div class="row">
-          <div class="col s4 offset-s4">
+           <!--1st column bottom left-->
+           <div class="col s4">
+            <p id="player1score"></p>
+          </div>
+          <!-- 2nd column bottom middle-->
+          <div class="col s4">
             <button class="btn-large" id="flipCardBtn">Flip Cards</button>
+          </div>
+            <!-- 3rd column bottom right -->
+          <div class="col s4">
+            <p id="player2score"></p>
           </div>
         </div>
       </div>
+
+      <div id="finalScore" class="hidden">
+        <p id="winner"></p>
+        <button class="btn-large" id="playAgain">Play Again?</button>
+        <button class="btn-large" id="homeBtn">Home</button>
+      </div>
+      
     </main>
 
     <div id="overlay">

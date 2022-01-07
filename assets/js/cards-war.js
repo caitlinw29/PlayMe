@@ -13,6 +13,7 @@ const instructions = document.getElementById("instructions");
 const player1text = document.getElementById("player1");
 const player2text = document.getElementById("player2");
 const flipCardsBtn = document.getElementById("flipCardBtn");
+const battleBtn = document.getElementById("battleBtn");
 const card1Img= document.getElementById("card1");
 const card2Img = document.getElementById("card2");
 let overlayVisible = false;
@@ -25,6 +26,8 @@ let losingCard;
 let winningCard;
 let player1Cards = [];
 let player2Cards = [];
+let card1num;
+let card2num;
 
 
 // GAME OPTIONS PAGE //
@@ -203,7 +206,7 @@ function startWarGame(){
         //flip a card on button click
         flipCardsBtn.addEventListener('click', flipCards);
         function flipCards(){
-          function setUpCards(){
+          
           //set up images to hold the current card for each player
           var card1src = deck1.cards[card1].image;
           var card2src = deck2.cards[card2].image;
@@ -215,15 +218,13 @@ function startWarGame(){
 
           //flip cards animation, flip will occur on click of the button to show the card
           $(".flip-card-inner").css("transform", "rotateY(180deg)");
-          }
-          setUpCards();
+          
+          
           //compare two player's card values
           //Plain variable is the string holding either a number or KING, QUEEN, JACK, or ACE
           var card1numPlain = deck1.cards[card1].value;
           var card2numPlain = deck2.cards[card2].value;
-          //we want to grab the corresponding number
-          let card1num;
-          let card2num; 
+          //we want to grab the corresponding number 
           if (card1numPlain === "ACE"){
             card1num = 1;
           } else if (card1numPlain === "JACK") {
@@ -250,7 +251,8 @@ function startWarGame(){
           //wait 3 seconds after button is clicked, and then flip the card back over (show 'back' of next card)
           setTimeout(function() {
             $(".flip-card-inner").css("transform", "rotateY(0deg)");
-          }, 3000)
+          }, 2500)
+          
           //conditionals for winning and losing the match
           //player1 wins the two cards
           if(card1num > card2num){
@@ -262,7 +264,7 @@ function startWarGame(){
             addElement(player1Cards, winningCard, losingCard)
             // add highlighting around a second after the card shows, then remove it after another second
             setTimeout(() => {card1Img.classList.add("highlight")}, 1200);
-            setTimeout(() => {card1Img.classList.remove("highlight")}, 4200);
+            setTimeout(() => {card1Img.classList.remove("highlight")}, 3900);
             console.log(player1Cards);
             console.log(player2Cards);
           } else if (card1num < card2num){ //player 2 wins the two cards
@@ -271,26 +273,20 @@ function startWarGame(){
             removeElement(player1Cards, losingCard);
             addElement(player2Cards, winningCard, losingCard);
             setTimeout(() => {card2Img.classList.add("highlight")}, 1200);
-            setTimeout(() => {card2Img.classList.remove("highlight")}, 2200);
+            setTimeout(() => {card2Img.classList.remove("highlight")}, 3900);
             console.log(player1Cards);
             console.log(player2Cards);
-          } else { //tie and war breaks out per game rules
-            console.log("WAR");
-            //sound effects?
-          }
-          
+          } 
           card1++;
           card2++;
           var numCards1 = player1Cards.length-1;
           var numCards2 = player2Cards.length-1;
           
-          //if we are at the end of the deck, loop back to the start of the array
-          if(card1 === 3){
+          //if we are at the end of the deck, shuffle the cards and keep going
+          if(card1 === numCards1){
             //take current array and put in in a string to use in the api call
             var cardString1 = player1Cards.toString();
             card1 = 0;
-            
-            
             //use the updated cardString to get a new deckID
             player1Deck = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=" + cardString1;
             fetchDeck1().then(deck=> {
@@ -308,12 +304,11 @@ function startWarGame(){
                 }
                 //flip a card on button click
                 flipCardsBtn.addEventListener('click', flipCards);
-                console.log(cards); 
               }); 
               
             });
           }
-          if(card2 === 4){
+          if(card2 === numCards2){
             var cardString2 = player2Cards.toString();
             card2 = 0;
             player2Deck = "https://deckofcardsapi.com/api/deck/new/shuffle/?cards=" + cardString2;
@@ -337,6 +332,8 @@ function startWarGame(){
           }
           //check each array. If cards remaining is 0, that player loses.
           if (player1Cards.length === 0){
+            console.log("CPU wins!");
+            player2win();
             //COMPUTER/NAME(p2) WINS
             //have a p in HTML with winning message. hide the losing person's card image so its a blank space
             //confetti effect if time or something fun
@@ -344,11 +341,11 @@ function startWarGame(){
 
           }
           if (player2Cards.length === 0){
+            console.log("Caitlin wins!")
+            player1win();
             //if player2 name is Computer, YOU WIN
             //if playing a friend, NAME(p1) WINS
           }
-          
-        
         };
       }) 
     });

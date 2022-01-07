@@ -2,6 +2,10 @@
   display: none;
 }
 
+.inline {
+  display: inline;
+}
+
 a {
   color: inherit;
 }

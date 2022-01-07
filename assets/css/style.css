@@ -50,24 +50,17 @@
 
 
 
+#description p:nth-child(2) {
+  margin-bottom: 5%;
+}
 
 
-
-.row {
+#collage .row {
   margin: 0px;
   padding: 0px;
 }
-.card-title {
-  color: black;
-}
-.row {
-  align-content: center;
-}
-.card {
-  align-content: center;
-}
 
-.row div{
+#collage .row div{
   height: 100px;
   padding: 0px !important;
 }
@@ -85,14 +78,14 @@
 
 @media only screen and (min-width: 1500px){
   #collage img,
-  .row div{
+  #collage .row div{
     height: 200px;
   }
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1499px){
   #collage img,
-  .row div{
+  #collage .row div{
     height: 150px;
   }
 }

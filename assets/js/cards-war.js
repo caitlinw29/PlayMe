@@ -272,3 +272,17 @@ function startWarGame(){
     });
 }
 
+//check size of screen on load - if they resize as they play, they'll have to refresh 
+function checkMediaQuery() {
+  // If the inner width of the window is less than 500px
+  if (window.innerWidth < 500) {
+    // Then log this message to the console
+    location.href = "./mobile-war.html";
+  }
+}
+//avoid getting stuck in an endless load mobile html, load js, load mobile again loop
+//only run function if it's not already mobile
+if (location.href != "./mobile-war.html"){
+  checkMediaQuery();
+}
+

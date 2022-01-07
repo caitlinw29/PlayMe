@@ -5,4 +5,17 @@
   --accent: #b9c6ae;
   --other: #12ae33
 }
+.card-title {
+  color: black;
+}
+.row {
+  align-content: center;
+}
+.card {
+  align-content: center;
+}
 
+.card-image {
+    height: 100px;
+    width: 100px;
+    

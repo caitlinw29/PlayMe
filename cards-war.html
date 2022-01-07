@@ -35,28 +35,103 @@
         </div>
         <div id="playerNames">
           <div id="onePlayer" class="hidden">
-            <label for="player1name">Player 1 Name:</label>
+            <label for="player1name">Player 1:</label>
             <input type="text" id="player1name" name="player1name">
           </div>
           <div id="twoPlayer" class="hidden">
-            <label for="player2name">Player 2 Name:</label>
+            <label for="player2name">Player 2:</label>
             <input type="text" id="player2name" name="player2name">
           </div>
         </div>
         <button id="startWarBtn" class="hidden btn-large">Start Game!</button>
       </div>
+      <div class="container hidden" id="war-game-container">
+        <!--1st Row-->
+        <div class="row">
+            <!--1st column top left-->
+            <div class="col s4">
+              <p id="player1"></p>
+            </div>
+            <!-- 2nd column top middle-->
+            <div class="col s4">
+            </div>
+              <!-- 3rd column top right -->
+            <div class="col s4">
+              <p id="player2"></p>
+            </div>
+        </div>
+      
+        <!-- 2nd row-->
+        <div class="row">
+          <!-- 1st column middle left   -->
+          <div class="col s4">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img src="./assets/img/card-back.png"  alt="Back of card">
+                </div>
+                <div class="flip-card-back">
+                  <img src="" id="card1" alt=""/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--2nd column middle middle -->
+          <div class="col s4">
+            <p id="vs">VS</p>
+          </div>
+          <!--3rd column middle right  -->
+          <div class="col s4">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img src="./assets/img/card-back.png"  alt="Back of card">
+                </div>
+                <div class="flip-card-back">
+                  <img src="" id="card2" alt=""/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Third row-->
+        <div class="row">
+           <!--1st column bottom left-->
+           <div class="col s4">
+            <p id="player1score"></p>
+          </div>
+          <!-- 2nd column bottom middle-->
+          <div class="col s4">
+            <button class="btn-large" id="flipCardBtn">Flip Cards</button>
+          </div>
+            <!-- 3rd column bottom right -->
+          <div class="col s4">
+            <p id="player2score"></p>
+          </div>
+        </div>
+      </div>
+
+      <div id="finalScore" class="hidden">
+        <p id="winner"></p>
+        <button class="btn-large" id="playAgain">Play Again?</button>
+        <button class="btn-large" id="homeBtn">Home</button>
+      </div>
+      
     </main>
+
     <div id="overlay">
       <div id="overlay-text">
         <h3>Instructions</h3>
         <p>* Click anywhere to exit instructions *</p>
         <br/>
-        <p> Your goal is to collect all 52 cards in the deck!</p>
+        <p> Your goal is to collect the most points!</p>
         <p>- Both players start with 26 cards.</p>
         <p>- Hit the flip cards button when you are ready to see your cards for the round!</p>
-        <p>- Whoever has the higher card keeps both cards for the round!</p>
-        <p>- If you have the same card, it's WAR! Each player will place two more cards down. Then they will flip the second card. Whoever has the higher card will keep ALL of the drawn cards!</p>
-        <p>- Game ends when one player has all cards!</p>
+        <p>- Whoever has the higher card earns a point for the round!</p>
+        <p>- If you have the same card, draw another card!</p>
+        <p> A=1 J=11 Q=12 K=13</p>
+        <p>Whoever has the most points after 26 rounds wins!</p>
         <p>Have fun! Thanks for playing &hearts;</p>
       </div>
     </div>
@@ -67,5 +142,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js" async defer></script>
     <script src="./assets/js/cards-war.js" async defer></script>
+    <script src="./assets/js/mobile-war.js" async defer></script>
   </body>
 </html>

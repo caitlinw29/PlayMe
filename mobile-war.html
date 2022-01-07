@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Play Me - War</title>
+  <meta name="description" content="A digital card game of War!">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+  <!--Add a google font if desired-->
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/normalize.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/cards.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body class="cyan lighten-5">
+  <div id="targetInstructions">
+    <img src="./assets/img/help.png" alt="How to Play" id="instructions" class="tooltipped" data-position="bottom"
+      data-tooltip="Click to see instructions!" />
+  </div>
+  <main class="center-align teal-text">
+    <a href="./cards-war.html">
+      <h1>🃏&nbspWar&nbsp🃏</h1>
+    </a>
+    <div id="gameOptions">
+      <div id="numberPlayers">
+        <p>How many players?</p>
+        <div id="opponentChoice">
+          <button id="computerBtn" class="btn-large">1</button>
+          <button id="friendBtn" class="btn-large">2</button>
+        </div>
+      </div>
+      <div id="playerNames">
+        <div id="onePlayer" class="hidden">
+          <label for="player1name">Player 1:</label>
+          <input type="text" id="player1name" name="player1name">
+        </div>
+        <div id="twoPlayer" class="hidden">
+          <label for="player2name">Player 2:</label>
+          <input type="text" id="player2name" name="player2name">
+        </div>
+      </div>
+      <button id="startWarBtn" class="hidden btn-large">Start Game!</button>
+    </div>
+
+
+    <div class="container hidden" id="war-game-container">
+      <!--1st Row-->
+      <div class="row cyan lighten-4">
+        <!--1st column top left-->
+        <div class="col s6">
+          <p id="player1"></p>
+          <p id="player1score"></p>
+        </div>
+        <!-- 2nd column top right-->
+        <div class="col s6">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="./assets/img/card-back.png" alt="Back of card">
+              </div>
+              <div class="flip-card-back">
+                <img src="" id="card1" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <!--Second row-->
+      <div class="row">
+        <!--1st column offset to middle-->
+        <div class="col s6 offset-s3">
+          <p id="vs" class="inline"></p>
+          <button class="btn-large inline" id="flipCardBtn">Flip Cards</button>
+        </div>
+      </div> 
+
+      <!--Third row-->
+      <div class="row cyan lighten-3">
+        <!--1st column left-->
+        <div class="col s6">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="./assets/img/card-back.png" alt="Back of card">
+              </div>
+              <div class="flip-card-back">
+                <img src="" id="card2" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 2nd column right-->
+        <div class="col s6">
+          <p id="player2"></p>
+          <p id="player2score"></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="finalScore" class="hidden">
+      <p id="winner"></p>
+      <button class="btn-large" id="playAgain">Play Again?</button>
+      <button class="btn-large" id="homeBtn">Home</button>
+    </div>
+
+  </main>
+
+  <div id="overlay">
+    <div id="overlay-text">
+      <h3>Instructions</h3>
+      <p>* Click anywhere to exit instructions *</p>
+      <br />
+      <p> Your goal is to collect the most points!</p>
+      <p>- Both players start with 26 cards.</p>
+      <p>- Hit the flip cards button when you are ready to see your cards for the round!</p>
+      <p>- Whoever has the higher card earns a point for the round!</p>
+      <p>- If you have the same card, draw another card!</p>
+      <p> A=1 J=11 Q=12 K=13</p>
+      <p>Whoever has the most points after 26 rounds wins!</p>
+      <p>Have fun! Thanks for playing &hearts;</p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="./assets/js/script.js" async defer></script>
+  <script src="./assets/js/cards-war.js" async defer></script>
+</body>
+
+</html>

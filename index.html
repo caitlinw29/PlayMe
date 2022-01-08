@@ -16,7 +16,15 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
-  <body>
+
+    
+    <h2>Welcome to Play Me</h2>
+    <div>
+      <p>
+        Play Me is an activity generator for those moments when you want
+        something to do, but can’t decide on exactly what.
+=======
+  <body class = "center-align teal-text cyan lighten-5">
     <header class="cyan darken-3 white-text">
       <a href="./index.html">
         <img src="assets/img/Logo.png" alt="Home"/>
@@ -29,25 +37,94 @@
           <p class="inline">Favorite Activities</p>
         </a> 
       </div>
-  <div>
-  </header>  
-    <h2>Welcome to Play Me</h2>
-    <div>
+    </header>  
+    <div class="teal lighten-2">
+      <div class="container" id="collage">
+        <div class="row">
+          <div class="col m3 s7">
+            <img src="./assets/img/book-g67875f74e_640.jpg" alt="">
+          </div>
+          <div class="col m4 s5">
+            <img src="./assets/img/poker-g430db2fe5_640.jpg" alt="">
+          </div>
+          <div class="col m3 hide-images">
+            <img src="./assets/img/game-gdb3392e3b_640.jpg" alt="">
+          </div>
+          <div class="col m2 hide-images">
+            <img src="./assets/img/guitar-gabd69ee38_640.jpg" alt="">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m2 s4">
+            <img src="./assets/img/spaghetti-gebbbdba97_640.jpg" alt="">
+          </div>
+          <div class="col m3 hide-images">
+            <img src="./assets/img/tic-tac-toe-gff1a88fe8_640.jpg" alt="">
+          </div>
+          <div class="col m2 s4">
+            <img src="./assets/img/kid-g3fd32e617_640.jpg" alt="">
+          </div>
+          <div class="col m2 hide-images">
+            <img src="./assets/img/child-g60017d035_640.jpg" alt="">
+          </div>
+          <div class="col m3 s4">
+            <img src="./assets/img/bicycle-g3536efd99_640.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>Welcome to PlayMe</h2>
+    <div class="center-align" id="description">
       <p>
-        Play Me is an activity generator for those moments when you want
-        something to do, but can’t decide on exactly what.
+        PlayMe lets you peruse activities during those moments of boredom where you can't quite decide what to do.
       </p>
       <p>
-        Select from the options below to choose between a card game or a randomly selected fun activity.
+        Choose between a randomly selected fun activity or a card game below.
       </p>
     </div>
-  <button class = "btn waves-effect cyan darken-3">GENERATE NEW GAME</button>
-  <element onclick="(myBtn)"></element>
     
-   </div> 
-           
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <div class="container" id="cards">
+      <div class="row">
+        <div class="col s12 m5">
+          <a href="./activity-gen.html">
+            <div class="card blue-grey darken-1">
+              <div class="card-image">
+                <img src="./assets/img/choice.jpg" height="200px">
+              </div>
+              <div class="card-action white-text">
+                <h3 class="card-title">Activity Generator</h3>
+                <p>Bored? Find random activity ideas!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col m2"></div>
+        <div class="col s12 m5">
+          <a href="./cards-war.html">
+            <div class="card blue-grey darken-1">
+              <div class="card-image">
+                <img src="./assets/img/card-game.jpg" height="200px">
+              </div>
+              <div class="card-action white-text">
+                <h3 class="card-title">Card Games</h3>
+                <p>Play a card game!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+      integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js" async defer></script>

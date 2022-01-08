@@ -1,20 +1,3 @@
-/*Decide on root color scheme*/ 
-:root {
-  --dark: #a0a0a0;
-  --light: #fff;
-  --accent: #b9c6ae;
-  --other: #12ae33
-}
-.card-title {
-  color: black;
-}
-.row {
-  align-content: center;
-}
-.card {
-  align-content: center;
-}
-
 body {
   height: 100%;
 }
@@ -22,7 +5,7 @@ body {
 .inline {
   display: inline;
 }
-
+/* HEADER*/
 header {
   width: 100%;
   height: 75px;
@@ -51,3 +34,71 @@ header a:hover{
 #btnhome:active{
   line-height : 25px;
 }
+
+/*DESCRIPTION AND CARDS*/
+.card {
+  text-align: center;
+}
+
+.card-action h3 {
+  font-size: 2.5rem !important;
+}
+
+.card-action p {
+  font-size: 1.5rem;
+}
+
+#cards a .card:hover {
+    box-shadow: 0px 0px 10px 10px #1de9b6;
+}
+
+#description p:nth-child(2) {
+  margin-bottom: 5%;
+}
+
+/* COLLAGE */
+#collage .row {
+  margin: 0px;
+  padding: 0px;
+}
+
+#collage .row div{
+  height: 100px;
+  padding: 0px !important;
+}
+
+#collage img{
+  height: 100px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (min-width: 1500px){
+  #collage img,
+  #collage .row div{
+    height: 200px;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1499px){
+  #collage img,
+  #collage .row div{
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 999px){
+  .card-image img {
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .hide-images{
+    display: none;
+  }
+}
+
+
+

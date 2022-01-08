@@ -6,6 +6,7 @@ const price = document.getElementById("price");
 const link = document.getElementById("link");
 const activityCardImg = document.getElementById("activityCardImg");
 let activityString = "";
+let activityKey;
 
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
@@ -22,6 +23,8 @@ function generateRandomActivityCard(){
         var activityArray = activityString.split(" ");
         activityString = activityArray.join("%20");
 
+        //save the key for later
+        activityKey = data.key;
         //change the textContent of the card
         activity.textContent = data.activity;
         type.textContent = data.type;

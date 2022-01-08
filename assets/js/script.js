@@ -25,13 +25,12 @@ if(collectionElement && existingActivities.count > 0 ) {
 document.getElementById("addFaves").addEventListener("click", function () {
   // console.log("Save to Favorites");
   // the variables below contain only the information in the text field.
-  var key = keyElement.textContent;
   var activityText = activityElement.textContent;
-  console.log(key);
+  console.log(activityKey);
   console.log(activityText);
 
   var addActivity = {
-    id: key,
+    id: activityKey,
     name: activityText,
   };
 

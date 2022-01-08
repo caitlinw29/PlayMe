@@ -106,9 +106,13 @@ document.getElementById("addFaves").addEventListener("click", function () {
   }
   //if the activity is already stored, return
   if (storedActivities.includes(addActivity.name)) {
+    document.getElementById("modalHeading").textContent = 'Already saved';
+    document.getElementById("modalText").textContent = 'You already saved this!';
     return;
   } else { //otherwise push the new activity to the array that goes into localstorage
     existingActivities.push(addActivity);
+    document.getElementById("modalHeading").textContent = 'Saved';
+    document.getElementById("modalText").textContent = 'Your activity was saved!';
   }
   //save to storage
   localStorage.setItem("allActivities", JSON.stringify(existingActivities));
@@ -122,3 +126,8 @@ function GetPropertyValue(obj, dataToRetrieve) {
       return o && o[k]; // get `o` and return, also checks sub properties
     }, obj) // set initial value as object
 }
+
+//set up modal
+$(document).ready(function(){
+  $('.modal').modal();
+});

@@ -5,19 +5,21 @@ const participants = document.getElementById("participants");
 const price = document.getElementById("price");
 const link = document.getElementById("link");
 const activityCardImg = document.getElementById("activityCardImg");
+const loader = document.getElementById("loading");
 let activityString = "";
 let activityKey;
 
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
-  
+  displayLoader();
   var randomActivityURL = "http://www.boredapi.com/api/activity/"
   fetch(randomActivityURL)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) { 
+        hideLoader();
         //set the activityString up to plug into the imageURL
         activityString = data.activity.toLowerCase();
         var activityArray = activityString.split(" ");
@@ -69,4 +71,15 @@ function generateRandomActivityCard(){
         //     console.error(err);
         //   });
       })
+}
+
+function displayLoader(){
+  loader.classList.add("display");
+  setTimeout(() => {
+    loader.classList.remove("display");
+  }, 5000);
+}
+
+function hideLoader(){
+  loader.classList.remove("display");
 }

@@ -10,3 +10,26 @@
 #findActivityBtn {
   margin: 2.5% 0;
 }
+
+/* creating css loader */
+#loading {
+  width: 3rem;
+  height: 3rem;
+  border: 5px solid #006064;
+  border-top: 6px solid #1de9b6;
+  border-radius: 100%;
+  margin: auto;
+  visibility: hidden;
+  animation: spin 1s infinite linear;
+}
+#loading.display {
+  visibility: visible;
+}
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}

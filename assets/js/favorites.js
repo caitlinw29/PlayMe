@@ -1,12 +1,13 @@
-// save to favorites button returns save to favorites
-// this variable contains the HTML information
+//collection is the div to hold the activities
 var collectionElement = document.getElementById("collection");
 
+var existingActivities = JSON.parse(localStorage.getItem("allActivities")) || [];
+//if we have activities, create a div for each of them and input the activity info
+if (existingActivities.length > 0 ) {
+    makeActivityDivs();
+}
 
-var existingActivities =
-    JSON.parse(localStorage.getItem("allActivities")) || [];
-
-if(existingActivities.length > 0 ) {
+function makeActivityDivs(){
     for (var i = 0; i < existingActivities.length; i++){
         var currentActivity = existingActivities[i];   
         var activityNewElement = document.createElement("div");
@@ -55,6 +56,84 @@ $(".deletion").on("click", function() {
     localStorage.setItem("allActivities", JSON.stringify(existingActivities));
 })
 
+//for each sort, on click, check the type of sort and then sort ascending or descending
+$(".material-icons").on("click", function() {
+    //clear the old list first
+    removeAllChildNodes(collectionElement);
+    if (this.parentNode.textContent.includes("Price")){
+        if (this.textContent === "arrow_upward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.price.toUpperCase();
+                var textB = b.price.toUpperCase();
+                return (textA > textB) ? -1 : (textA < textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        } else if (this.textContent === "arrow_downward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.price.toUpperCase();
+                var textB = b.price.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        }
+    } else if (this.parentNode.textContent.includes("Participants")){
+        if (this.textContent === "arrow_upward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.participants.toUpperCase();
+                var textB = b.participants.toUpperCase();
+                return (textA > textB) ? -1 : (textA < textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        } else if (this.textContent === "arrow_downward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.participants.toUpperCase();
+                var textB = b.participants.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        }
+    } else if (this.parentNode.textContent.includes("Type")){
+        if (this.textContent === "arrow_upward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.type.toUpperCase();
+                var textB = b.type.toUpperCase();
+                return (textA > textB) ? -1 : (textA < textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        } else if (this.textContent === "arrow_downward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.type.toUpperCase();
+                var textB = b.type.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        }
+    } else if (this.parentNode.textContent.includes("Activity")){
+        if (this.textContent === "arrow_upward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.name.toUpperCase();
+                var textB = b.name.toUpperCase();
+                return (textA > textB) ? -1 : (textA < textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        } else if (this.textContent === "arrow_downward"){
+            existingActivities.sort(function(a, b) {
+                var textA = a.name.toUpperCase();
+                var textB = b.name.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
+            makeActivityDivs();
+        }
+    }
+})
+
+//remove the children (except the first, which for some reason is 2 not 1) to clear the old list
+function removeAllChildNodes(parent) {
+    while (parent.childNodes.length > 2) {
+        parent.removeChild(parent.lastChild);
+    }
+}
+
 //set up function to grab the value of the property
 function GetPropertyValue(obj, dataToRetrieve) {
     return dataToRetrieve
@@ -62,4 +141,4 @@ function GetPropertyValue(obj, dataToRetrieve) {
       .reduce(function(o, k) {
         return o && o[k]; // get `o` and return, also checks sub properties
       }, obj) // set initial value as object
-  }
+}

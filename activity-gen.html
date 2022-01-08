@@ -21,8 +21,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/normalize.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/activity-gen.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
@@ -37,6 +37,25 @@
         <h1>Activity Generator</h1>
       </a>
       <button class="btn-large" id="findActivityBtn">Find an Activity!</button>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-image">
+              <img id="activityCardImg" src="./assets/img/choice.jpg" alt="" width="500px" height="300px">
+              <a id="addFaves" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons add">add</i></a>
+            </div>
+            <div class="card-content">
+              <p class="card-title" id="activity"></p>
+              <p>Type: <span id="type"></span></p>
+              <p>Participants: <span id="participants"></span></p>
+              <p>Price: <span id="price"></span></p>
+              <a href="" target="_blank" id="link"></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script

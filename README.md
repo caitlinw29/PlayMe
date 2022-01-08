@@ -12,7 +12,7 @@ PlayMe is a web-based application that allows users to randomly generate a fun a
 
  ![License](https://img.shields.io/badge/License-MIT-yellow)
 
- PlayMe is a front-end web application. Our team designed and built this application using HTML, CSS, JavaScript, Materialize, and public APIs: [Deck of Cards API](https://deckofcardsapi.com/) and [Bored API](https://www.boredapi.com/). 
+ PlayMe is a front-end web application. Our team designed and built this application using HTML, CSS, JavaScript, Materialize, and public APIs: [Deck of Cards API](https://deckofcardsapi.com/), [Web Search API](https://rapidapi.com/contextualwebsearch/api/web-search/) and [Bored API](https://www.boredapi.com/). 
 
 ```md
  GIVEN the PlayMe web application

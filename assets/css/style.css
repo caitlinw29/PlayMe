@@ -71,6 +71,21 @@ header a:hover{
   padding: 0;
 }
 
+/* DELETION IN FAVORITES*/
+.status-icon {
+  padding: 2px 5px;
+  background-color:  #1de9b6;
+}
+
+.status-icon:hover {
+  background-color: red;
+  cursor: pointer;
+}
+
+.icon-danger {
+  color: black;
+}
+
 @media only screen and (min-width: 1500px){
   #collage img,
   #collage .row div{

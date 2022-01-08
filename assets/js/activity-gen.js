@@ -8,11 +8,11 @@ const activityCardImg = document.getElementById("activityCardImg");
 const loader = document.getElementById("loading");
 const activityCard = document.getElementById("activityCard");
 let activityString = "";
-let activityKey;
 
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
+  activityCard.classList.add("hidden");
   displayLoader();
   var randomActivityURL = "http://www.boredapi.com/api/activity/"
   fetch(randomActivityURL)
@@ -27,8 +27,6 @@ function generateRandomActivityCard(){
         var activityArray = activityString.split(" ");
         activityString = activityArray.join("%20");
 
-        //save the key for later
-        activityKey = data.key;
         //change the textContent of the card
         activity.textContent = data.activity;
         type.textContent = data.type;
@@ -66,7 +64,6 @@ function generateRandomActivityCard(){
         //     return response.json();
         //   })
         //   .then(data => {
-        //     console.log(data);
         //     activityCardImg.src = data.value[0].thumbnail;
         //   })
         //   .catch(err => {
@@ -80,9 +77,57 @@ function displayLoader(){
   loader.classList.add("display");
   setTimeout(() => {
     loader.classList.remove("display");
-  }, 5000);
+  }, 30000);
 }
 
 function hideLoader(){
   loader.classList.remove("display");
 }
+
+//Add favorites to storage
+document.getElementById("addFaves").addEventListener("click", function () {
+  var activityText = activity.textContent;
+  var activityType = type.textContent;
+  var activityParticipant = participants.textContent;
+  var activityPrice = price.textContent;
+  var addActivity = {
+    name: activityText,
+    type: activityType,
+    participants: activityParticipant,
+    price: activityPrice
+  };
+  
+  var existingActivities = JSON.parse(localStorage.getItem("allActivities")) || [];
+  let storedActivities = [];
+  //check for existing activities so duplicates are not saved
+  for (let item in existingActivities) {
+    let propVal = GetPropertyValue(existingActivities[item], "name");
+    storedActivities.push(propVal);
+  }
+  //if the activity is already stored, return
+  if (storedActivities.includes(addActivity.name)) {
+    document.getElementById("modalHeading").textContent = 'Already saved';
+    document.getElementById("modalText").textContent = 'You already saved this!';
+    return;
+  } else { //otherwise push the new activity to the array that goes into localstorage
+    existingActivities.push(addActivity);
+    document.getElementById("modalHeading").textContent = 'Saved';
+    document.getElementById("modalText").textContent = 'Your activity was saved!';
+  }
+  //save to storage
+  localStorage.setItem("allActivities", JSON.stringify(existingActivities));
+});
+
+//set up function to grab the value of the property
+function GetPropertyValue(obj, dataToRetrieve) {
+  return dataToRetrieve
+    .split('.') // split string based on `.`
+    .reduce(function(o, k) {
+      return o && o[k]; // get `o` and return, also checks sub properties
+    }, obj) // set initial value as object
+}
+
+//set up modal
+$(document).ready(function(){
+  $('.modal').modal();
+});

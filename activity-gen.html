@@ -59,7 +59,7 @@
           <div class="card cyan darken-3 white-text">
             <div class="card-image">
               <img id="activityCardImg" src="./assets/img/choice.jpg" alt="" width="500px" height="300px">
-              <a id="addFaves" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons add">add</i></a>
+              <a id="addFaves" class="btn-floating btn-large halfway-fab waves-effect waves-light modal-trigger red" href="#modal1"><i class="material-icons add">add</i></a>
             </div>
             <div class="card-content">
               <p class="card-title" id="activity"></p>
@@ -70,6 +70,16 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <!--Modal for confirming user saved their activity-->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 id="modalHeading"></h4>
+        <p id="modalText"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
       </div>
     </div>
 
@@ -86,6 +96,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/activity-gen.js" async defer></script>
-    <script src="./assets/js/favorites.js" async defer></script>
   </body>
 </html>

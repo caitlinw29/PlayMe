@@ -12,6 +12,8 @@ if(existingActivities.length > 0 ) {
         var activities = existingActivities[i];   
         activityNewElement.setAttribute("id", "activity-" + i);
         activityNewElement.textContent = activities.name;
+        activityNewElement.setAttribute("style", "margin-bottom:1%; padding:1%");
+        activityNewElement.classList.add("teal")
         collectionElement.append(activityNewElement);
     }
   

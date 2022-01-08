@@ -2,6 +2,8 @@
 
 PlayMe is a web-based application that allows users to randomly generate a fun activity idea or participate in a card game!
 
+* [See PlayMe live!](https://caitlinw29.github.io/PlayMe/)
+
 ## User Story
 
 ```md
@@ -36,17 +38,17 @@ PlayMe is a web-based application that allows users to randomly generate a fun a
 
 ## Screen-Shots
 
-![]()
+![Landing Page](./assets/img/landingPage.png)
 
-![]()
+![Activity Generator](./assets/img/activityGenerator.png)
 
-![]()
+![Favorites List](./assets/img/favorites.png)
 
-![]()
+![War Options](./assets/img/warOptions.png)
 
-![]()
+![War Game - backs](./assets/img/war-back.png)
 
-![]()
+![War Game - front/action](./assets/img/war-front.png)
 
 ## Project Requirements
 * Use a CSS framework other than Bootstrap.

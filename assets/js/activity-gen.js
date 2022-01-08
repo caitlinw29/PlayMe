@@ -13,6 +13,7 @@ let activityKey;
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
+  activityCard.classList.add("hidden");
   displayLoader();
   var randomActivityURL = "http://www.boredapi.com/api/activity/"
   fetch(randomActivityURL)
@@ -66,7 +67,6 @@ function generateRandomActivityCard(){
         //     return response.json();
         //   })
         //   .then(data => {
-        //     console.log(data);
         //     activityCardImg.src = data.value[0].thumbnail;
         //   })
         //   .catch(err => {
@@ -80,7 +80,7 @@ function displayLoader(){
   loader.classList.add("display");
   setTimeout(() => {
     loader.classList.remove("display");
-  }, 5000);
+  }, 30000);
 }
 
 function hideLoader(){

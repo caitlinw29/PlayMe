@@ -11,6 +11,11 @@
   font-size: 1.2rem;
 }
 
+#link {
+  color: inherit;
+  text-decoration: underline;
+}
+
 #findActivityBtn {
   margin: 2.5% 0;
 }

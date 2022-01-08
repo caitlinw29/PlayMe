@@ -86,3 +86,21 @@ function displayLoader(){
 function hideLoader(){
   loader.classList.remove("display");
 }
+
+//Add favorites to storage
+document.getElementById("addFaves").addEventListener("click", function () {
+  // console.log("Save to Favorites");
+  // the variables below contain only the information in the text field.
+  var activityText = activity.textContent;
+  console.log(activityText);
+
+  var addActivity = {
+    name: activityText,
+  };
+
+  var existingActivities =
+    JSON.parse(localStorage.getItem("allActivities")) || [];
+
+  existingActivities.push(addActivity);
+  localStorage.setItem("allActivities", JSON.stringify(existingActivities));
+});

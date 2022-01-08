@@ -1,13 +1,47 @@
+body {
+  height: 100%;
+}
+
+.inline {
+  display: inline;
+}
+
+/* HEADER*/
+header {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+header a {
+  color: inherit;
+}
+
+header a:hover{
+  cursor: pointer;
+  color: rgb(6, 73, 104);
+}
+
+#headerText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding:0 2%;
+}
+
 /*DESCRIPTION AND CARDS*/
-.card {
+#cards .card {
   text-align: center;
 }
 
-.card-action h3 {
+#cards .card-action h3 {
   font-size: 2.5rem !important;
 }
 
-.card-action p {
+#cards .card-action p {
   font-size: 1.5rem;
 }
 
@@ -52,7 +86,7 @@
 }
 
 @media only screen and (max-width: 999px){
-  .card-image img {
+  #cards .card-image img {
     height: 150px;
   }
 }

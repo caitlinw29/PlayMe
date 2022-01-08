@@ -6,6 +6,7 @@ const price = document.getElementById("price");
 const link = document.getElementById("link");
 const activityCardImg = document.getElementById("activityCardImg");
 const loader = document.getElementById("loading");
+const activityCard = document.getElementById("activityCard");
 let activityString = "";
 let activityKey;
 
@@ -20,6 +21,7 @@ function generateRandomActivityCard(){
       })
       .then(function (data) { 
         hideLoader();
+        activityCard.classList.remove("hidden");
         //set the activityString up to plug into the imageURL
         activityString = data.activity.toLowerCase();
         var activityArray = activityString.split(" ");
@@ -73,6 +75,7 @@ function generateRandomActivityCard(){
       })
 }
 
+//loader functions to show spinning wheel
 function displayLoader(){
   loader.classList.add("display");
   setTimeout(() => {

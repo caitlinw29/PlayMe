@@ -14,25 +14,25 @@ if(collectionElement && existingActivities.count > 0 ) {
     collectionElement.innerHTML = "";
     for (var i = 0; i < existingActivities.count; i++){
         var activityNewElement = document.createElement("div");
-        var activity = existingActivities[i];   
-        activityNewElement.setAttribute("id", activity.key );
-        activityNewElement.innerText = activity.name;
+        var activities = existingActivities[i];   
+        activityNewElement.setAttribute("id", activities.key );
+        activityNewElement.innerText = activities.name;
         collectionElement.append(activityNewElement);
     }
   
 }
 
-document.getElementById("fvBtn").addEventListener("click", function () {
+document.getElementById("addFaves").addEventListener("click", function () {
   // console.log("Save to Favorites");
   // the variables below contain only the information in the text field.
   var key = keyElement.textContent;
-  var activity = activityElement.textContent;
+  var activityText = activityElement.textContent;
   console.log(key);
-  console.log(activity);
+  console.log(activityText);
 
   var addActivity = {
     id: key,
-    name: activity,
+    name: activityText,
   };
 
   var existingActivities =

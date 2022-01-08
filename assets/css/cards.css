@@ -1,3 +1,4 @@
+/* GENERAL */
 .hidden {
   display: none;
 }
@@ -31,7 +32,7 @@ h1 {
 #vs {
   padding-top: 50px;
 }
-
+ /* GAME OPTIONS AREA */
 #gameOptions {
   margin-top: 2%;
 }

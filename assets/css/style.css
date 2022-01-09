@@ -86,6 +86,12 @@ header a:hover{
   color: black;
 }
 
+/* FAVORITES ICONS */
+.material-icons:hover {
+  cursor: pointer;
+  font-weight: 700;
+}
+
 @media only screen and (min-width: 1500px){
   #collage img,
   #collage .row div{

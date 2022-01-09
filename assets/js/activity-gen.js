@@ -7,21 +7,91 @@ const link = document.getElementById("link");
 const activityCardImg = document.getElementById("activityCardImg");
 const loader = document.getElementById("loading");
 const activityCard = document.getElementById("activityCard");
+const filter = document.getElementById("filter");
+const selectType = document.getElementById('selectType');
+const selectPrice = document.getElementById('selectPrice');
+const selectNumPeople = document.getElementById('selectNumPeople');
 let activityString = "";
 
+filter.addEventListener("click", function(){
+  this.parentNode.className = "col s12";
+  this.className = "collapsible-header cyan lighten-5 cyan-text text-lighten-5";
+})
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
+  let randomActivityURL = "http://www.boredapi.com/api/activity";
+  //hide the old card and display loader while waiting
   activityCard.classList.add("hidden");
   displayLoader();
-  var randomActivityURL = "http://www.boredapi.com/api/activity/"
+  //conditionals to check search params
+  const filterOptions = [];
+  if(selectPrice.selectedIndex !== 0) {
+    //grabs the user choice
+    var selectedPrice = selectPrice.options[selectPrice.selectedIndex].text;
+    let priceUrl;
+    //adds the appropriate range to the url
+    if (selectedPrice === "FREE"){
+      priceUrl = "?price=0.0";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$"){
+      priceUrl = "?minprice=.1&maxprice=.29";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$$"){
+      priceUrl = "?minprice=.3&maxprice=.59";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$$$"){
+      priceUrl = "?minprice=.6&maxprice=.89";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$$$$"){
+      priceUrl = "?minprice=.9&maxprice=1.0";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    }
+    //array is used to check if nothing was selected
+    filterOptions.push(selectedPrice);
+  }
+
+  if(selectType.selectedIndex !== 0) {
+    let typeUrl;
+    var selectedType = selectType.options[selectType.selectedIndex].text;
+    //if there is already a ? in the url, & is used to link the sections
+    if (randomActivityURL.includes("?")){
+      typeUrl = "&type=" + selectedType;
+    } else {
+      typeUrl = "?type=" + selectedType;
+    }
+    randomActivityURL = randomActivityURL.concat(typeUrl);
+    filterOptions.push(selectedType);
+  } 
+
+  if(selectNumPeople.selectedIndex !== 0) {
+    let peopleUrl;
+    var selectedPeople = selectNumPeople.options[selectNumPeople.selectedIndex].text;
+    if (randomActivityURL.includes("?")){
+      peopleUrl = "&participants=" + selectedPeople;
+    } else {
+      peopleUrl = "?participants=" + selectedPeople;
+    }
+    randomActivityURL = randomActivityURL.concat(peopleUrl);
+    filterOptions.push(selectedPeople);
+  } 
+ 
+  //if nothing was chosen, add / to run the random activity as normal
+  if (filterOptions.length === 0){
+    randomActivityURL += "/"
+  } 
+
   fetch(randomActivityURL)
       .then(function (response) {
         return response.json();
       })
-      .then(function (data) { 
-        hideLoader();
-        activityCard.classList.remove("hidden");
+      .then(function (data) {
+        //if there is an error, no search results found. So let the user know. 
+        if (data.error){
+          document.getElementById("modal2").classList.remove("hidden");
+          hideLoader();
+          return;
+        }
         //set the activityString up to plug into the imageURL
         activityString = data.activity.toLowerCase();
         var activityArray = activityString.split(" ");
@@ -32,6 +102,7 @@ function generateRandomActivityCard(){
         type.textContent = data.type;
         participants.textContent = data.participants;
         let symbolPrice;
+
         //set up price ranges
         if(data.price >= 0 && data.price < .1){
           symbolPrice = "FREE";
@@ -45,30 +116,33 @@ function generateRandomActivityCard(){
           symbolPrice = "$$$$";
         }
         price.textContent = symbolPrice;
-        //if a link exists, plug it in to the
+
+        //if a link exists, plug it in to the href and use the activity as text content
         if (data.link !== ""){
           link.href = data.link;
           link.textContent = data.activity;
         }
-        //!! DO NOT ADD THIS IN YET. IT ADDS THE PICTURES BUT CAITLIN HAS TO PAY PAST A CERTAIN NUMBER OF API CALLS, SO WE ARE LEAVING IT OUT UNTIL PRESENTATION
-        //!! THERE IS A HARDCODED IMAGE IN THE HTML, USE THAT FOR PRACTICE/MESSING WITH THE BUTTON 
-        // var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
-        // fetch(imageURL, {
-        //   "method": "GET",
-        //   "headers": {
-        //     "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-        //     "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
-        //   }
-        // })
-        //   .then(response => {
-        //     return response.json();
-        //   })
-        //   .then(data => {
-        //     activityCardImg.src = data.value[0].thumbnail;
-        //   })
-        //   .catch(err => {
-        //     console.error(err);
-        //   });
+        //fetch an image using the activity name as a search query
+        var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
+        fetch(imageURL, {
+          "method": "GET",
+          "headers": {
+            "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+            "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
+          }
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            //set the picture in the card, hide the loader, and show the card
+            activityCardImg.src = data.value[0].thumbnail;
+            hideLoader();
+            activityCard.classList.remove("hidden");
+          })
+          .catch(err => {
+            console.error(err);
+          });
       })
 }
 
@@ -86,6 +160,7 @@ function hideLoader(){
 
 //Add favorites to storage
 document.getElementById("addFaves").addEventListener("click", function () {
+  //set up the addActivity object with the textContent of the pertaining areas
   var activityText = activity.textContent;
   var activityType = type.textContent;
   var activityParticipant = participants.textContent;
@@ -104,12 +179,13 @@ document.getElementById("addFaves").addEventListener("click", function () {
     let propVal = GetPropertyValue(existingActivities[item], "name");
     storedActivities.push(propVal);
   }
-  //if the activity is already stored, return
+  //if the activity is already stored, tell the user and return
   if (storedActivities.includes(addActivity.name)) {
     document.getElementById("modalHeading").textContent = 'Already saved';
     document.getElementById("modalText").textContent = 'You already saved this!';
     return;
   } else { //otherwise push the new activity to the array that goes into localstorage
+    //and tell the user they saved
     existingActivities.push(addActivity);
     document.getElementById("modalHeading").textContent = 'Saved';
     document.getElementById("modalText").textContent = 'Your activity was saved!';
@@ -129,5 +205,18 @@ function GetPropertyValue(obj, dataToRetrieve) {
 
 //set up modal
 $(document).ready(function(){
-  $('.modal').modal();
+  $('.modal').modal({
+    //adjust opacity so that there isn't a gray screen when finding an activity
+    opacity: 0,
+  });
+});
+
+//set up select
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
+//collapsible
+$(document).ready(function(){
+  $('.collapsible').collapsible();
 });

@@ -7,12 +7,6 @@
     <meta name="description" content="Randomly generated activities!">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
-    <!--Add a google font if desired-->
-
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -25,12 +19,6 @@
     <link rel="stylesheet" href="./assets/css/normalize.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/activity-gen.css" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
   </head>
   <body class = "center-align teal-text cyan lighten-5">
     <header class="cyan darken-3 white-text">
@@ -50,16 +38,70 @@
       <a href="./activity-gen.html" id="activitygenLink">
         <h1>Activity Generator</h1>
       </a>
-      <button class="btn-large" id="findActivityBtn">Find an Activity!</button>
+      <div class="container" id="filterDiv">
+        <ul class="collapsible row">
+          <li class="col s4 offset-s5 ">
+            <div class="collapsible-header cyan lighten-5" id="filter"><i class="material-icons">filter_list</i>Filter</div>
+            <div class="collapsible-body container">
+              <div class="row">
+                <div class="input-field col s12">
+                  <select id="selectType">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">education</option>
+                    <option value="2">recreational</option>
+                    <option value="3">social</option>
+                    <option value="4">diy</option>
+                    <option value="5">charity</option>
+                    <option value="6">cooking</option>
+                    <option value="7">relaxation</option>
+                    <option value="8">music</option>
+                    <option value="9">busywork</option>
+                  </select>
+                  <label>Activity Type</label>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="input-field col s12 m6">
+                  <select id="selectPrice">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">FREE</option>
+                    <option value="2">$</option>
+                    <option value="3">$$</option>
+                    <option value="4">$$$</option>
+                    <option value="5">$$$$</option>
+                  </select>
+                  <label>Activity Price</label>
+                </div> 
+                <div class="input-field col s12 m6">
+                  <select id="selectNumPeople">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                  </select>
+                  <label>Number of People</label>
+                </div> 
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <button class="btn-large modal-trigger" id="findActivityBtn" data-target="modal2">Find an Activity!</button>
     </div>
     <div id="loading"></div>
     <div class="container hidden" id="activityCard">
       <div class="row">
-        <div class="col s12">
-          <div class="card cyan darken-3 white-text">
-            <div class="card-image">
-              <img id="activityCardImg" src="./assets/img/choice.jpg" alt="" width="500px" height="300px">
-              <a id="addFaves" class="btn-floating btn-large halfway-fab waves-effect waves-light modal-trigger red" href="#modal1"><i class="material-icons add">add</i></a>
+        <div class="col s12 m8 offset-m2">
+          <div class="card medium cyan darken-3 white-text">
+            <div class="card-image" style="overflow: visible">
+              <img id="activityCardImg" src="./assets/img/choice.jpg" alt="" height="200px">
+              <a id="addFaves" class="btn-floating btn-large halfway-fab waves-effect waves-light modal-trigger red" href="#modal1"><i class="material-icons large">add</i></a>
             </div>
             <div class="card-content">
               <p class="card-title" id="activity"></p>
@@ -79,7 +121,17 @@
         <p id="modalText"></p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
+      </div>
+    </div>
+    <!--Modal for alerting user that there is no activity per their search-->
+    <div id="modal2" class="modal hidden">
+      <div class="modal-content">
+        <h4>Sorry!</h4>
+        <p>No activities found for your search.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
       </div>
     </div>
 
@@ -88,12 +140,6 @@
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-      integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/activity-gen.js" async defer></script>
   </body>

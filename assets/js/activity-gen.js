@@ -23,29 +23,29 @@ function generateRandomActivityCard(){
   //TODO Basic structure is working, but need to add API url based on selections
   //conditionals to check search params
   if(selectType.selectedIndex == 0) {
-    alert('select one answer');
+    console.log('select one answer');
   }
   else {
     var selectedText = selectType.options[selectType.selectedIndex].text;
-    alert(selectedText);
+    console.log(selectedText);
   }
 
 
   if(selectPrice.selectedIndex == 0) {
-    alert('select one answer');
+    console.log('select one answer');
   }
   else {
     var selectedText = selectPrice.options[selectPrice.selectedIndex].text;
-    alert(selectedText);
+    console.log(selectedText);
   }
 
 
   if(selectNumPeople.selectedIndex == 0) {
-    alert('select one answer');
+    console.log('select one answer');
   }
   else {
     var selectedText = selectNumPeople.options[selectNumPeople.selectedIndex].text;
-    alert(selectedText);
+    console.log(selectedText);
   }
 
 

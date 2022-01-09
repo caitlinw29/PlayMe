@@ -38,6 +38,60 @@
       <a href="./activity-gen.html" id="activitygenLink">
         <h1>Activity Generator</h1>
       </a>
+      <div class="container" id="filterDiv">
+        <ul class="collapsible row">
+          <li class="col s4 offset-s5 ">
+            <div class="collapsible-header cyan lighten-5" id="filter"><i class="material-icons">filter_list</i>Filter</div>
+            <div class="collapsible-body container">
+              <div class="row">
+                <div class="input-field col s12">
+                  <select>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">education</option>
+                    <option value="2">recreational</option>
+                    <option value="3">social</option>
+                    <option value="4">diy</option>
+                    <option value="5">charity</option>
+                    <option value="6">cooking</option>
+                    <option value="7">relaxation</option>
+                    <option value="8">music</option>
+                    <option value="9">busywork</option>
+                  </select>
+                  <label>Activity Type</label>
+                </div> 
+              </div>
+              <div class="row">
+                <div class="input-field col s12 m6">
+                  <select>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">FREE</option>
+                    <option value="2">$</option>
+                    <option value="3">$$</option>
+                    <option value="4">$$$</option>
+                    <option value="5">$$$$</option>
+                  </select>
+                  <label>Activity Price</label>
+                </div> 
+                <div class="input-field col s12 m6">
+                  <select>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                  </select>
+                  <label>Number of People</label>
+                </div> 
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
       <button class="btn-large" id="findActivityBtn">Find an Activity!</button>
     </div>
     <div id="loading"></div>

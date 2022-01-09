@@ -17,12 +17,18 @@
 }
 
 #findActivityBtn {
-  margin: 1% 0 2.5%;
+  margin-bottom: 2.5%;
 }
 
 .card-content {
   margin-top: 5%;
   margin-bottom: 5%;
+}
+
+.collapsible-header, .collapsible-body, .collapsible, ul.collapsible>li 
+{
+  border: 0!important;
+  box-shadow: none!important;
 }
 
 /* creating css loader */

@@ -7,20 +7,30 @@ const link = document.getElementById("link");
 const activityCardImg = document.getElementById("activityCardImg");
 const loader = document.getElementById("loading");
 const activityCard = document.getElementById("activityCard");
+const filter = document.getElementById("filter");
 let activityString = "";
 
+filter.addEventListener("click", function(){
+  this.parentNode.className = "col s12";
+  this.className = "collapsible-header cyan lighten-5 cyan-text text-lighten-5";
+})
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
   //hide the old card and display loader while waiting
   activityCard.classList.add("hidden");
   displayLoader();
+  //conditionals to check search params
+  //if
+  // if ()
   var randomActivityURL = "http://www.boredapi.com/api/activity/"
   fetch(randomActivityURL)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) { 
+        hideLoader();
+        activityCard.classList.remove("hidden");
         //set the activityString up to plug into the imageURL
         activityString = data.activity.toLowerCase();
         var activityArray = activityString.split(" ");
@@ -52,26 +62,26 @@ function generateRandomActivityCard(){
           link.textContent = data.activity;
         }
         //fetch an image using the activity name as a search query
-        var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
-        fetch(imageURL, {
-          "method": "GET",
-          "headers": {
-            "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-            "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
-          }
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            //set the picture in the card, hide the loader, and show the card
-            activityCardImg.src = data.value[0].thumbnail;
-            hideLoader();
-            activityCard.classList.remove("hidden");
-          })
-          .catch(err => {
-            console.error(err);
-          });
+      //   var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
+      //   fetch(imageURL, {
+      //     "method": "GET",
+      //     "headers": {
+      //       "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+      //       "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
+      //     }
+      //   })
+      //     .then(response => {
+      //       return response.json();
+      //     })
+      //     .then(data => {
+      //       //set the picture in the card, hide the loader, and show the card
+      //       activityCardImg.src = data.value[0].thumbnail;
+      //       hideLoader();
+      //       activityCard.classList.remove("hidden");
+      //     })
+      //     .catch(err => {
+      //       console.error(err);
+      //     });
       })
 }
 
@@ -135,4 +145,14 @@ function GetPropertyValue(obj, dataToRetrieve) {
 //set up modal
 $(document).ready(function(){
   $('.modal').modal();
+});
+
+//set up select
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
+//collapsible
+$(document).ready(function(){
+  $('.collapsible').collapsible();
 });

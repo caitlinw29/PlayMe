@@ -20,50 +20,78 @@ filter.addEventListener("click", function(){
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
-  //TODO Basic structure is working, but need to add API url based on selections
-  //conditionals to check search params
-  if(selectType.selectedIndex == 0) {
-    console.log('select one answer');
-  }
-  else {
-    var selectedText = selectType.options[selectType.selectedIndex].text;
-    console.log(selectedText);
-  }
-
-
-  if(selectPrice.selectedIndex == 0) {
-    console.log('select one answer');
-  }
-  else {
-    var selectedText = selectPrice.options[selectPrice.selectedIndex].text;
-    console.log(selectedText);
-  }
-
-
-  if(selectNumPeople.selectedIndex == 0) {
-    console.log('select one answer');
-  }
-  else {
-    var selectedText = selectNumPeople.options[selectNumPeople.selectedIndex].text;
-    console.log(selectedText);
-  }
-
-
-
-
-
-
+  let randomActivityURL = "http://www.boredapi.com/api/activity";
   //hide the old card and display loader while waiting
   activityCard.classList.add("hidden");
   displayLoader();
-  var randomActivityURL = "http://www.boredapi.com/api/activity/"
+  //conditionals to check search params
+  const filterOptions = [];
+  if(selectPrice.selectedIndex !== 0) {
+    //grabs the user choice
+    var selectedPrice = selectPrice.options[selectPrice.selectedIndex].text;
+    let priceUrl;
+    //adds the appropriate range to the url
+    if (selectedPrice === "FREE"){
+      priceUrl = "?price=0.0";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$"){
+      priceUrl = "?minprice=.1&maxprice=.29";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$$"){
+      priceUrl = "?minprice=.3&maxprice=.59";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$$$"){
+      priceUrl = "?minprice=.6&maxprice=.89";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    } else if (selectedPrice === "$$$$"){
+      priceUrl = "?minprice=.9&maxprice=1.0";
+      randomActivityURL = randomActivityURL.concat(priceUrl);
+    }
+    //array is used to check if nothing was selected
+    filterOptions.push(selectedPrice);
+  }
+
+  if(selectType.selectedIndex !== 0) {
+    let typeUrl;
+    var selectedType = selectType.options[selectType.selectedIndex].text;
+    //if there is already a ? in the url, & is used to link the sections
+    if (randomActivityURL.includes("?")){
+      typeUrl = "&type=" + selectedType;
+    } else {
+      typeUrl = "?type=" + selectedType;
+    }
+    randomActivityURL = randomActivityURL.concat(typeUrl);
+    filterOptions.push(selectedType);
+  } 
+
+  if(selectNumPeople.selectedIndex !== 0) {
+    let peopleUrl;
+    var selectedPeople = selectNumPeople.options[selectNumPeople.selectedIndex].text;
+    if (randomActivityURL.includes("?")){
+      peopleUrl = "&participants=" + selectedPeople;
+    } else {
+      peopleUrl = "?participants=" + selectedPeople;
+    }
+    randomActivityURL = randomActivityURL.concat(peopleUrl);
+    filterOptions.push(selectedPeople);
+  } 
+ 
+  //if nothing was chosen, add / to run the random activity as normal
+  if (filterOptions.length === 0){
+    randomActivityURL += "/"
+  } 
+
   fetch(randomActivityURL)
       .then(function (response) {
         return response.json();
       })
-      .then(function (data) { 
-        hideLoader();
-        activityCard.classList.remove("hidden");
+      .then(function (data) {
+        //if there is an error, no search results found. So let the user know. 
+        if (data.error){
+          document.getElementById("modal2").classList.remove("hidden");
+          hideLoader();
+          return;
+        }
         //set the activityString up to plug into the imageURL
         activityString = data.activity.toLowerCase();
         var activityArray = activityString.split(" ");
@@ -95,26 +123,26 @@ function generateRandomActivityCard(){
           link.textContent = data.activity;
         }
         //fetch an image using the activity name as a search query
-      //   var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
-      //   fetch(imageURL, {
-      //     "method": "GET",
-      //     "headers": {
-      //       "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-      //       "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
-      //     }
-      //   })
-      //     .then(response => {
-      //       return response.json();
-      //     })
-      //     .then(data => {
-      //       //set the picture in the card, hide the loader, and show the card
-      //       activityCardImg.src = data.value[0].thumbnail;
-      //       hideLoader();
-      //       activityCard.classList.remove("hidden");
-      //     })
-      //     .catch(err => {
-      //       console.error(err);
-      //     });
+        var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
+        fetch(imageURL, {
+          "method": "GET",
+          "headers": {
+            "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+            "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
+          }
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            //set the picture in the card, hide the loader, and show the card
+            activityCardImg.src = data.value[0].thumbnail;
+            hideLoader();
+            activityCard.classList.remove("hidden");
+          })
+          .catch(err => {
+            console.error(err);
+          });
       })
 }
 
@@ -177,7 +205,10 @@ function GetPropertyValue(obj, dataToRetrieve) {
 
 //set up modal
 $(document).ready(function(){
-  $('.modal').modal();
+  $('.modal').modal({
+    //adjust opacity so that there isn't a gray screen when finding an activity
+    opacity: 0,
+  });
 });
 
 //set up select

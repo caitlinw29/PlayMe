@@ -92,7 +92,7 @@
           </li>
         </ul>
       </div>
-      <button class="btn-large" id="findActivityBtn">Find an Activity!</button>
+      <button class="btn-large modal-trigger" id="findActivityBtn" data-target="modal2">Find an Activity!</button>
     </div>
     <div id="loading"></div>
     <div class="container hidden" id="activityCard">
@@ -121,7 +121,17 @@
         <p id="modalText"></p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
+      </div>
+    </div>
+    <!--Modal for alerting user that there is no activity per their search-->
+    <div id="modal2" class="modal hidden">
+      <div class="modal-content">
+        <h4>Sorry!</h4>
+        <p>No activities found for your search.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
       </div>
     </div>
 

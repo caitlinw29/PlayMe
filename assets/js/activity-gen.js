@@ -8,6 +8,9 @@ const activityCardImg = document.getElementById("activityCardImg");
 const loader = document.getElementById("loading");
 const activityCard = document.getElementById("activityCard");
 const filter = document.getElementById("filter");
+const selectType = document.getElementById('selectType');
+const selectPrice = document.getElementById('selectPrice');
+const selectNumPeople = document.getElementById('selectNumPeople');
 let activityString = "";
 
 filter.addEventListener("click", function(){
@@ -17,12 +20,42 @@ filter.addEventListener("click", function(){
 randomBtn.addEventListener("click", generateRandomActivityCard);
 
 function generateRandomActivityCard(){
+  //TODO Basic structure is working, but need to add API url based on selections
+  //conditionals to check search params
+  if(selectType.selectedIndex == 0) {
+    alert('select one answer');
+  }
+  else {
+    var selectedText = selectType.options[selectType.selectedIndex].text;
+    alert(selectedText);
+  }
+
+
+  if(selectPrice.selectedIndex == 0) {
+    alert('select one answer');
+  }
+  else {
+    var selectedText = selectPrice.options[selectPrice.selectedIndex].text;
+    alert(selectedText);
+  }
+
+
+  if(selectNumPeople.selectedIndex == 0) {
+    alert('select one answer');
+  }
+  else {
+    var selectedText = selectNumPeople.options[selectNumPeople.selectedIndex].text;
+    alert(selectedText);
+  }
+
+
+
+
+
+
   //hide the old card and display loader while waiting
   activityCard.classList.add("hidden");
   displayLoader();
-  //conditionals to check search params
-  //if
-  // if ()
   var randomActivityURL = "http://www.boredapi.com/api/activity/"
   fetch(randomActivityURL)
       .then(function (response) {

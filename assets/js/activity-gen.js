@@ -92,6 +92,9 @@ function generateRandomActivityCard(){
           hideLoader();
           return;
         }
+        //!! If adding image search, delete the following two lines
+        hideLoader();
+        activityCard.classList.remove("hidden");
         //set the activityString up to plug into the imageURL
         activityString = data.activity.toLowerCase();
         var activityArray = activityString.split(" ");
@@ -123,26 +126,27 @@ function generateRandomActivityCard(){
           link.textContent = data.activity;
         }
         //fetch an image using the activity name as a search query
-        var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
-        fetch(imageURL, {
-          "method": "GET",
-          "headers": {
-            "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-            "x-rapidapi-key": "028b2f00a2msh04217c3fa191984p185e73jsn48767f836887"
-          }
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            //set the picture in the card, hide the loader, and show the card
-            activityCardImg.src = data.value[0].thumbnail;
-            hideLoader();
-            activityCard.classList.remove("hidden");
-          })
-          .catch(err => {
-            console.error(err);
-          });
+        //!! To add image search back in, uncomment below and add your key
+        // var imageURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=" + activityString + "&pageNumber=1&pageSize=1&autoCorrect=true";
+        // fetch(imageURL, {
+        //   "method": "GET",
+        //   "headers": {
+        //     "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+        //     "x-rapidapi-key": //!! Add your RAPIDAPI key here
+        //   }
+        // })
+        //   .then(response => {
+        //     return response.json();
+        //   })
+        //   .then(data => {
+        //     //set the picture in the card, hide the loader, and show the card
+        //     activityCardImg.src = data.value[0].thumbnail;
+        //     hideLoader();
+        //     activityCard.classList.remove("hidden");
+        //   })
+        //   .catch(err => {
+        //     console.error(err);
+        //   });
       })
 }
 
